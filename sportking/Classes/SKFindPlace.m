@@ -11,7 +11,9 @@
 #import "FPPopoverController.h"
 #import "SKSelectKind.h"
 
-@interface SKFindPlace ()
+@interface SKFindPlace ()<selectKindDelegate>{
+    FPPopoverController *popover;
+}
 
 -(void)changeDisplay;
 -(void)changeKind;
@@ -136,8 +138,9 @@
 -(void)popover:(id)sender
 {
     //the controller we want to present as a popover
-    UIViewController* mainViewController = [[SKSelectKind alloc] init];
-    FPPopoverController *popover = [[FPPopoverController alloc] initWithViewController:mainViewController];
+    SKSelectKind* mainViewController = [[SKSelectKind alloc] init];
+    mainViewController.delegate = self;
+    popover = [[FPPopoverController alloc] initWithViewController:mainViewController];
     
     //popover.arrowDirection = FPPopoverArrowDirectionAny;
     popover.tint = FPPopoverDefaultTint;
@@ -150,6 +153,11 @@
     
     //sender is the UIButton view
     [popover presentPopoverFromView:sender];
+}
+
+-(void)selectKindDidFinish:(int)kind{
+    NSLog(@"%d",kind);
+    [popover dismissPopoverAnimated:YES];
 }
 
 

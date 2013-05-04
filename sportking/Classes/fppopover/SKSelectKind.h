@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SKSelectKind : UIViewController
+@protocol selectKindDelegate <NSObject>
 
+-(void)selectKindDidFinish:(int)kind;
+
+@end
+
+@interface SKSelectKind : UIViewController
+@property(nonatomic,readwrite,retain)id<selectKindDelegate> delegate;
+
+-(IBAction)button_click:(id)sender;
 @end

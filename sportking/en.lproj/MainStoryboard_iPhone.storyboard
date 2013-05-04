@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12C3012" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Xbj-m4-lTy">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12D78" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Xbj-m4-lTy">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -138,7 +138,7 @@
             <objects>
                 <viewController id="ehN-Nv-pFP" customClass="SKJoin" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="V7L-9e-vVa">
-                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OQ2-Am-Dog">
@@ -148,6 +148,9 @@
                             </mapView>
                             <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="tth-VG-Rwk">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="455" id="c8h-Cs-nOA"/>
+                                </constraints>
                                 <connections>
                                     <outlet property="dataSource" destination="ehN-Nv-pFP" id="hco-YA-UBL"/>
                                     <outlet property="delegate" destination="ehN-Nv-pFP" id="gg0-oy-KWc"/>
@@ -156,18 +159,35 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="OQ2-Am-Dog" firstAttribute="bottom" secondItem="V7L-9e-vVa" secondAttribute="bottom" type="default" id="HPY-yv-wS2"/>
+                            <constraint firstItem="tth-VG-Rwk" firstAttribute="top" secondItem="OQ2-Am-Dog" secondAttribute="top" type="default" id="H5d-kJ-k0a"/>
+                            <constraint firstItem="tth-VG-Rwk" firstAttribute="top" secondItem="V7L-9e-vVa" secondAttribute="top" constant="2" id="IhE-AQ-cq3"/>
                             <constraint firstItem="OQ2-Am-Dog" firstAttribute="leading" secondItem="V7L-9e-vVa" secondAttribute="leading" type="default" id="MUh-Yr-AJi"/>
                             <constraint firstItem="OQ2-Am-Dog" firstAttribute="trailing" secondItem="V7L-9e-vVa" secondAttribute="trailing" type="default" id="aN9-Qe-Y49"/>
                             <constraint firstItem="tth-VG-Rwk" firstAttribute="trailing" secondItem="V7L-9e-vVa" secondAttribute="trailing" type="default" id="bm8-Jb-PGi"/>
-                            <constraint firstItem="OQ2-Am-Dog" firstAttribute="top" secondItem="V7L-9e-vVa" secondAttribute="top" type="default" id="cNK-a8-Ee4"/>
-                            <constraint firstItem="tth-VG-Rwk" firstAttribute="top" secondItem="V7L-9e-vVa" secondAttribute="top" type="default" id="m4f-um-NiF"/>
+                            <constraint firstItem="OQ2-Am-Dog" firstAttribute="bottom" secondItem="tth-VG-Rwk" secondAttribute="bottom" type="default" id="mpY-v4-3xH"/>
                             <constraint firstItem="tth-VG-Rwk" firstAttribute="leading" secondItem="V7L-9e-vVa" secondAttribute="leading" type="default" id="wgA-v0-vMf"/>
-                            <constraint firstItem="tth-VG-Rwk" firstAttribute="bottom" secondItem="V7L-9e-vVa" secondAttribute="bottom" type="default" id="z6M-Ac-xEL"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="S0f-VA-7SS"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="S0f-VA-7SS">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="aed-47-xOc">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="hqZ-zB-wvp">
+                                <rect key="frame" x="5" y="6" width="71" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="hiddenBtn" destination="hqZ-zB-wvp" id="n3o-wz-iSf"/>
                         <outlet property="map" destination="OQ2-Am-Dog" id="jlV-6f-lhg"/>
                         <outlet property="table" destination="tth-VG-Rwk" id="bVN-fm-aDG"/>
                     </connections>
@@ -342,6 +362,7 @@
         <class className="SKJoin" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SKJoin.h"/>
             <relationships>
+                <relationship kind="outlet" name="hiddenBtn" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="map" candidateClass="MKMapView"/>
                 <relationship kind="outlet" name="table" candidateClass="UITableView"/>
             </relationships>

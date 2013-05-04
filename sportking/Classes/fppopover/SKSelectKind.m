@@ -13,6 +13,7 @@
 @end
 
 @implementation SKSelectKind
+@synthesize delegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -33,6 +34,16 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+-(IBAction)button_click:(id)sender{
+    int tag = [((UIButton*)sender) tag];
+
+    if ([self.delegate respondsToSelector:@selector(selectKindDidFinish:)]) {
+        [self.delegate selectKindDidFinish:tag];
+    }
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

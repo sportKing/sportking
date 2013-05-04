@@ -184,7 +184,6 @@
 		84EEC0AA16E8491000E799DD = {
 			isa = PBXGroup;
 			children = (
-				8412689F16EA58A300A85E65 /* MapKit.framework */,
 				84EEC0BC16E8491000E799DD /* sportking */,
 				84EEC0B516E8491000E799DD /* Frameworks */,
 				84EEC0B416E8491000E799DD /* Products */,
@@ -202,6 +201,7 @@
 		84EEC0B516E8491000E799DD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8412689F16EA58A300A85E65 /* MapKit.framework */,
 				84EEC0B616E8491000E799DD /* UIKit.framework */,
 				84EEC0B816E8491000E799DD /* Foundation.framework */,
 				84EEC0BA16E8491000E799DD /* CoreGraphics.framework */,

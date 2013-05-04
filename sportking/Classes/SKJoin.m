@@ -8,14 +8,20 @@
 
 #import "SKJoin.h"
 #import "sportcell.h"
+#import "SKSelectKind.h"
+#import "FPPopoverController.h"
+@interface SKJoin ()<selectKindDelegate>{
+    FPPopoverController *popover;
+}
 
-@interface SKJoin ()
-
+-(void)changeDisplay;
+-(void)changeKind;
 @end
 
 @implementation SKJoin
 @synthesize table;
 @synthesize map;
+@synthesize hiddenBtn;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -130,7 +136,34 @@
 }
 
 -(void)changeKind{
-    
+    [self popover:hiddenBtn];
 }
+
+-(void)popover:(id)sender
+{
+    //the controller we want to present as a popover
+    SKSelectKind* mainViewController = [[SKSelectKind alloc] init];
+    mainViewController.delegate = self;
+    popover = [[FPPopoverController alloc] initWithViewController:mainViewController];
+    
+    //popover.arrowDirection = FPPopoverArrowDirectionAny;
+    popover.tint = FPPopoverDefaultTint;
+    
+    if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+    {
+        popover.contentSize = CGSizeMake(300, 500);
+    }
+    popover.arrowDirection = FPPopoverArrowDirectionAny;
+    
+    //sender is the UIButton view
+    [popover presentPopoverFromView:sender];
+}
+
+-(void)selectKindDidFinish:(int)kind{
+    NSLog(@"%d",kind);
+    [popover dismissPopoverAnimated:YES];
+}
+
+
 
 @end
