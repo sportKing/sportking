@@ -13,6 +13,7 @@
     BOOL isShowMap;
     NSMutableArray *name;
     NSMutableArray *position;
+    NSMutableArray *placeDic;
 
 }
 

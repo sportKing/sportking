@@ -11,9 +11,27 @@
 #import "FPPopoverController.h"
 #import "SKSelectKind.h"
 
+#import "CallOutAnnotationVifew.h"
+#import "CalloutMapAnnotation.h"
+#import "JingDianMapCell.h"
+#import "BasicMapAnnotation.h"
+
+#import "ASIFormDataRequest.h"
+#import "JSONDictionaryExtensions.h"
+
+#import "SKMapDetail.h"
+
+
 @interface SKFindPlace ()<selectKindDelegate>{
     FPPopoverController *popover;
+    
+    NSMutableArray *_annotationList;
+    
+    CalloutMapAnnotation *_calloutAnnotation;
+    CalloutMapAnnotation *_previousdAnnotation;
+    double X,Y;
 }
+-(void)setAnnotionsWithList:(NSArray *)list;
 
 -(void)changeDisplay;
 -(void)changeKind;
@@ -36,8 +54,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    placeDic = [[NSMutableArray alloc] init];
+    
+    _annotationList = [[NSMutableArray alloc] init];
+    
 	// Do any additional setup after loading the view.
     isShowMap = YES;
+    X = 1000;
+    Y = 1000;
     [self.navigationController.visibleViewController setTitle:@"找場地"];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"列表" style:UIBarButtonItemStyleDone target:self action:@selector(changeDisplay)];
@@ -45,8 +70,8 @@
     /* 暫時的！ */
     name = [[NSMutableArray alloc] initWithObjects:@"台科大室內籃球場",@"台大籃球場",@"民族國中",@"公館國小",@"大安森林公園",@"世新籃球場",@"青年公園籃球場",@"板球體育館籃球場",@"內湖籃球場", nil];
     position = [[NSMutableArray alloc] initWithObjects:@"距離 0 km",@"距離 0.2 km",@"距離 0.2 km",@"距離 0.5 km",@"距離 4 km",@"距離 5 km",@"距離 12 km",@"距離 15 km",@"距離 20 km", nil];
-
- }
+    
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -61,7 +86,8 @@
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [name count];
+//    return [name count];
+    return [placeDic count];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -74,9 +100,10 @@
         NSArray* nibObjs = [[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:nil options:nil];
         cell = [nibObjs objectAtIndex:0];
     }
-    
-    cell.name.text = [name objectAtIndex:indexPath.row];
-    cell.position.text = [position objectAtIndex:indexPath.row];
+    NSDictionary *dic = [placeDic objectAtIndex:[indexPath row]];
+    cell.name.text = [dic objectForKey:@"sitename"];
+    cell.position.text = [NSString stringWithFormat:@"距離 %f 公里",
+                                            [[dic objectForKey:@"distance"] floatValue]];
     return cell;
 }
 
@@ -84,16 +111,140 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
+    
+    
+    NSDictionary *dic = [placeDic objectAtIndex:[indexPath row]];
+    SKMapDetail* FirstViewController = [storyboard instantiateViewControllerWithIdentifier:@"SKMapDetail"];
+    [FirstViewController setTitle:[dic objectForKey:@"sitename"]];
+    [FirstViewController.sitename setText:[dic objectForKey:@"sitename"]];
+    [self.navigationController pushViewController:FirstViewController animated:YES];
 }
 
 #pragma mark -map
+
+-(void)setAnnotionsWithList:(NSArray *)list
+{
+    for (NSDictionary *dic in list) {
+        
+        CLLocationDegrees latitude=[[dic objectForKey:@"latitude"] doubleValue];
+        CLLocationDegrees longitude=[[dic objectForKey:@"longitude"] doubleValue];
+        CLLocationCoordinate2D location=CLLocationCoordinate2DMake(latitude, longitude);
+        
+        MKCoordinateRegion region=MKCoordinateRegionMakeWithDistance(location,4000 ,4000 );
+        MKCoordinateRegion adjustedRegion = [map regionThatFits:region];
+        [map setRegion:adjustedRegion animated:YES];
+        
+        BasicMapAnnotation *  annotation=[[[BasicMapAnnotation alloc] initWithLatitude:latitude andLongitude:longitude]  autorelease];
+        [annotation setTitle:[dic objectForKey:@"sitename"]];
+        [annotation setContent:[NSString stringWithFormat:@"距離 %f 公里",
+                                [[dic objectForKey:@"distance"] floatValue]]];
+        [map addAnnotation:annotation];
+    }
+}
+
+
+- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
+	if ([view.annotation isKindOfClass:[BasicMapAnnotation class]]) {
+        BasicMapAnnotation *annotation = (BasicMapAnnotation*)view.annotation;
+        if (_calloutAnnotation.coordinate.latitude == view.annotation.coordinate.latitude&&
+            _calloutAnnotation.coordinate.longitude == view.annotation.coordinate.longitude) {
+            return;
+        }
+        if (_calloutAnnotation) {
+            [mapView removeAnnotation:_calloutAnnotation];
+            _calloutAnnotation = nil;
+        }
+        _calloutAnnotation = [[[CalloutMapAnnotation alloc]
+                               initWithLatitude:view.annotation.coordinate.latitude
+                               andLongitude:view.annotation.coordinate.longitude] autorelease];
+        [_calloutAnnotation setTitle:annotation.title];
+        [_calloutAnnotation setContent:annotation.content];
+        [mapView addAnnotation:_calloutAnnotation];
+    
+        
+        [mapView setCenterCoordinate:_calloutAnnotation.coordinate animated:YES];
+	}
+    else{
+//        if([delegate respondsToSelector:@selector(customMKMapViewDidSelectedWithInfo:)]){
+//            [delegate customMKMapViewDidSelectedWithInfo:@"点击至之后你要在这干点啥"];
+//        }
+    }
+}
+
+- (void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view {
+    if (_calloutAnnotation&& ![view isKindOfClass:[CallOutAnnotationVifew class]]) {
+        if (_calloutAnnotation.coordinate.latitude == view.annotation.coordinate.latitude&&
+            _calloutAnnotation.coordinate.longitude == view.annotation.coordinate.longitude) {
+            [mapView removeAnnotation:_calloutAnnotation];
+            _calloutAnnotation = nil;
+        }
+    }
+}
+
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
+    
+	if ([annotation isKindOfClass:[CalloutMapAnnotation class]]) {
+        CalloutMapAnnotation *annotation_new = (CalloutMapAnnotation*)annotation;
+        CallOutAnnotationVifew *annotationView = (CallOutAnnotationVifew *)[mapView dequeueReusableAnnotationViewWithIdentifier:@"CalloutView"];
+        if (!annotationView) {
+            annotationView = [[[CallOutAnnotationVifew alloc] initWithAnnotation:annotation reuseIdentifier:@"CalloutView"] autorelease];
+            JingDianMapCell  *cell = [[[NSBundle mainBundle] loadNibNamed:@"JingDianMapCell" owner:self options:nil] objectAtIndex:0];
+            [cell.name setText:annotation_new.title];
+            [cell.content setText:annotation_new.content];
+            [cell.btn addTarget:self action:@selector(detail_click) forControlEvents:UIControlEventTouchUpInside];
+            [annotationView setCell:cell];
+            [annotationView.contentView addSubview:cell];
+        }else{
+            [annotationView.cell.name setText:annotation_new.title];
+            [annotationView.cell.content setText:annotation_new.content];
+            
+        }
+        return annotationView;
+	} else if ([annotation isKindOfClass:[BasicMapAnnotation class]]) {
+        
+        MKAnnotationView *annotationView =[map dequeueReusableAnnotationViewWithIdentifier:@"CustomAnnotation"];
+        if (!annotationView) {
+            annotationView = [[[MKAnnotationView alloc] initWithAnnotation:annotation
+                                                           reuseIdentifier:@"CustomAnnotation"] autorelease];
+            annotationView.canShowCallout = NO;
+            annotationView.image = [UIImage imageNamed:@"pin.png"];
+        }
+		
+		return annotationView;
+    }
+	return nil;
+}
+
+- (void)resetAnnitations:(NSArray *)data
+{
+    [_annotationList removeAllObjects];
+    [_annotationList addObjectsFromArray:data];
+    [self setAnnotionsWithList:_annotationList];
+}
+
+-(void)detail_click{
+    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
+    
+    SKMapDetail* FirstViewController = [storyboard instantiateViewControllerWithIdentifier:@"SKMapDetail"];
+    [FirstViewController setTitle:_calloutAnnotation.title];
+    [FirstViewController.sitename setText:_calloutAnnotation.title];
+    [self.navigationController pushViewController:FirstViewController animated:YES];
+}
+
 -(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation{
     
     //取得現在位置
-    double X = userLocation.location.coordinate.latitude;
-    double Y = userLocation.location.coordinate.longitude;
+    
+    if (abs(X - userLocation.location.coordinate.latitude) <1 && abs(Y == userLocation.location.coordinate.longitude)<1) {
+        return;
+    }
+    X = userLocation.location.coordinate.latitude;
+    Y = userLocation.location.coordinate.longitude;
     
     NSLog(@"現在位置   x:%f  y:%f",X,Y);
+    
     
     //自行定義的設定地圖函式
 //    [self setMapRegionLongitude:Y andLatitude:X withLongitudeSpan:0.05 andLatitudeSpan:0.05];
@@ -158,7 +309,47 @@
 -(void)selectKindDidFinish:(int)kind{
     NSLog(@"%d",kind);
     [popover dismissPopoverAnimated:YES];
+    NSURL* url = [NSURL URLWithString: @"http://huang-yao-building.com/db/API.php"];
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+    [request setPostValue:@"getPlace" forKey:@"method"];
+    [request setPostValue:[NSString stringWithFormat:@"%d",kind] forKey:@"id"];
+    [request setPostValue:[NSString stringWithFormat:@"%f",X] forKey:@"x"];
+    [request setPostValue:[NSString stringWithFormat:@"%f",Y] forKey:@"y"];
+    [request setRequestMethod:@"POST"];
+    [request setDidFinishSelector:@selector(requestDone:)];
+    [request setDidFailSelector:@selector(requestError:)];
+    [request setDelegate:self];
+    [request startAsynchronous];
 }
 
+- (void)requestDone:(ASIHTTPRequest *)request
+{
+    NSString *response = [request responseString];
+    NSDictionary *JSON = [NSJSONSerialization JSONObjectWithData: [response dataUsingEncoding:NSUTF8StringEncoding] options: NSJSONReadingMutableLeaves error: nil];
 
+    [placeDic removeAllObjects];
+    NSMutableArray *arr = [[NSMutableArray alloc]init];
+    for (NSDictionary *dic in JSON) {
+        [placeDic addObject:dic];
+        NSDictionary *dic1=[NSDictionary dictionaryWithObjectsAndKeys:
+                            [dic objectForKey:@"sitename"],@"sitename",
+                            [dic objectForKey:@"distance"],@"distance",
+                            [dic objectForKey:@"x"],@"latitude",
+                            [dic objectForKey:@"y"],@"longitude",nil];
+        [arr addObject:dic1];
+    }
+    [table reloadData];
+    
+    [self resetAnnitations:arr];
+    
+    
+//    NSLog(@"%@",response);
+    NSLog(@"~~~%d   %@",[JSON count],JSON);
+    
+}
+- (void)requestError:(ASIHTTPRequest *)request
+{
+    //NSError *error = [request error];
+    NSLog(@"error");
+}
 @end

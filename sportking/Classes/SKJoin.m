@@ -80,6 +80,14 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
+    
+    [self.navigationController.visibleViewController setTitle:@"活動"];
+    UIViewController* FirstViewController = [storyboard instantiateViewControllerWithIdentifier:@"SKJoinDetail"];
+    
+    [self.navigationController pushViewController:FirstViewController animated:YES];
+
 }
 
 #pragma mark - map

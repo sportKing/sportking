@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SKKnowledge : UIViewController
+@interface SKKnowledge : UIViewController{
+    
+}
+@property(nonatomic,readwrite,retain)IBOutlet UIButton *hiddenBtn;
 
 @end
