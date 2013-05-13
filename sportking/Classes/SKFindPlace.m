@@ -21,6 +21,9 @@
 
 #import "SKMapDetail.h"
 
+#import <Social/Social.h>
+#import <Accounts/Accounts.h>
+
 
 @interface SKFindPlace ()<selectKindDelegate>{
     FPPopoverController *popover;
@@ -70,6 +73,26 @@
     /* 暫時的！ */
     name = [[NSMutableArray alloc] initWithObjects:@"台科大室內籃球場",@"台大籃球場",@"民族國中",@"公館國小",@"大安森林公園",@"世新籃球場",@"青年公園籃球場",@"板球體育館籃球場",@"內湖籃球場", nil];
     position = [[NSMutableArray alloc] initWithObjects:@"距離 0 km",@"距離 0.2 km",@"距離 0.2 km",@"距離 0.5 km",@"距離 4 km",@"距離 5 km",@"距離 12 km",@"距離 15 km",@"距離 20 km", nil];
+    
+    ACAccountStore *account = [[ACAccountStore alloc] init];
+    ACAccountType *accountType = [account accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
+    NSArray *accounts = [account
+                         accountsWithAccountType:accountType];
+    ACAccount *facebookAccount = [accounts lastObject];
+    NSString *acessToken = [NSString stringWithFormat:@"%@",facebookAccount.credential.oauthToken];
+    NSDictionary *parameters = @{@"access_token": acessToken};
+    NSURL *feedURL = [NSURL URLWithString:@"https://graph.facebook.com/me/friends"];
+    SLRequest *feedRequest = [SLRequest
+                              requestForServiceType:SLServiceTypeFacebook
+                              requestMethod:SLRequestMethodGET
+                              URL:feedURL
+                              parameters:parameters];
+    feedRequest.account = facebookAccount;
+    [feedRequest performRequestWithHandler:^(NSData *responseData,
+                                             NSHTTPURLResponse *urlResponse, NSError *error)
+     {
+         NSLog(@"%@",[[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding]);
+     }];
     
 }
 
