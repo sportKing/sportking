@@ -35,4 +35,12 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)dealloc {
+    [_label release];
+    [super dealloc];
+}
+- (void)viewDidUnload {
+    [self setLabel:nil];
+    [super viewDidUnload];
+}
 @end

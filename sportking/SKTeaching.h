@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SKTeaching : UIViewController
+@interface SKTeaching : UIViewController{
+    NSMutableArray *names;
+}
 
+@property(nonatomic,readwrite,retain)IBOutlet UIButton *hiddenBtn;
+@property (retain, nonatomic) IBOutlet UITableView *table;
 @end

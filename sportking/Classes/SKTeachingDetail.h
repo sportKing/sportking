@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface SKTeachingDetail : UIViewController
+@property (retain, nonatomic) IBOutlet UILabel *label;
 
 @end

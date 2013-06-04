@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SKKnowledgeDetail : UIViewController
+@interface SKKnowledgeDetail : UIViewController<UIWebViewDelegate>
+@property (retain, nonatomic) IBOutlet UIWebView *webView;
+
 
 @end
