@@ -7,18 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <MapKit/MapKit.h>
 
 @interface SKJoin : UIViewController{
-    BOOL isShowMap;
     NSMutableArray *names;
     NSMutableArray *peoples;
     NSMutableArray *descripts;
 
 }
 
-
 @property(nonatomic,readwrite,retain)IBOutlet UITableView *table;
-@property(nonatomic,readwrite,retain)IBOutlet MKMapView *map;
 @property(nonatomic,readwrite,retain)IBOutlet UIButton *hiddenBtn;
 @end

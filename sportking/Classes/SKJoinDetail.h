@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SKJoinDetail : UIViewController
+@interface SKJoinDetail : UIViewController<UIAlertViewDelegate>
 
 @end

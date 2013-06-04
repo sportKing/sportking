@@ -124,7 +124,7 @@
         cell = [nibObjs objectAtIndex:0];
     }
     NSDictionary *dic = [placeDic objectAtIndex:[indexPath row]];
-    cell.name.text = [dic objectForKey:@"sitename"];
+    cell.name.text = [name objectAtIndex:indexPath.row];//[dic objectForKey:@"sitename"];
     cell.position.text = [NSString stringWithFormat:@"距離 %f 公里",
                                             [[dic objectForKey:@"distance"] floatValue]];
     return cell;
@@ -365,8 +365,6 @@
     
     [self resetAnnitations:arr];
     
-    
-//    NSLog(@"%@",response);
     NSLog(@"~~~%d   %@",[JSON count],JSON);
     
 }

@@ -21,6 +21,9 @@
 		2CE00FB7173996F40007C0CC /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CE00FB6173996F40007C0CC /* MobileCoreServices.framework */; };
 		2CE00FB9173997040007C0CC /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CE00FB8173997040007C0CC /* libz.dylib */; };
 		2CE00FBB1739970D0007C0CC /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CE00FBA1739970D0007C0CC /* libxml2.dylib */; };
+		2CFD6C9E175DC6AE003FF5AF /* SKKnowledgeDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFD6C9D175DC6AD003FF5AF /* SKKnowledgeDetail.m */; };
+		2CFD6CA1175E57AB003FF5AF /* SKTeaching.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFD6CA0175E57AB003FF5AF /* SKTeaching.m */; };
+		2CFD6CA4175E5E52003FF5AF /* SKTeachingDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFD6CA3175E5E52003FF5AF /* SKTeachingDetail.m */; };
 		8410D3991739E6AD00DA74B2 /* pin.png in Resources */ = {isa = PBXBuildFile; fileRef = 8410D3981739E6AD00DA74B2 /* pin.png */; };
 		8410D39C1739FA0D00DA74B2 /* SKMapDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 8410D39B1739FA0D00DA74B2 /* SKMapDetail.m */; };
 		8412686116EA4F9200A85E65 /* SKFindPlace.m in Sources */ = {isa = PBXBuildFile; fileRef = 8412686016EA4F9200A85E65 /* SKFindPlace.m */; };
@@ -73,7 +76,6 @@
 		84EEC0CD16E8491000E799DD /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84EEC0CC16E8491000E799DD /* Default-568h@2x.png */; };
 		84EEC0D016E8491000E799DD /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84EEC0CE16E8491000E799DD /* MainStoryboard_iPhone.storyboard */; };
 		84EEC0D316E8491000E799DD /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84EEC0D116E8491000E799DD /* MainStoryboard_iPad.storyboard */; };
-		84EEC0D616E8491000E799DD /* SKViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84EEC0D516E8491000E799DD /* SKViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -105,6 +107,12 @@
 		2CE00FB6173996F40007C0CC /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		2CE00FB8173997040007C0CC /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		2CE00FBA1739970D0007C0CC /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		2CFD6C9C175DC6AD003FF5AF /* SKKnowledgeDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKKnowledgeDetail.h; sourceTree = "<group>"; };
+		2CFD6C9D175DC6AD003FF5AF /* SKKnowledgeDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKKnowledgeDetail.m; sourceTree = "<group>"; };
+		2CFD6C9F175E57AB003FF5AF /* SKTeaching.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SKTeaching.h; path = ../SKTeaching.h; sourceTree = "<group>"; };
+		2CFD6CA0175E57AB003FF5AF /* SKTeaching.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SKTeaching.m; path = ../SKTeaching.m; sourceTree = "<group>"; };
+		2CFD6CA2175E5E51003FF5AF /* SKTeachingDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTeachingDetail.h; sourceTree = "<group>"; };
+		2CFD6CA3175E5E52003FF5AF /* SKTeachingDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTeachingDetail.m; sourceTree = "<group>"; };
 		8410D3981739E6AD00DA74B2 /* pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pin.png; sourceTree = "<group>"; };
 		8410D39A1739FA0D00DA74B2 /* SKMapDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKMapDetail.h; sourceTree = "<group>"; };
 		8410D39B1739FA0D00DA74B2 /* SKMapDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKMapDetail.m; sourceTree = "<group>"; };
@@ -179,8 +187,6 @@
 		84EEC0CC16E8491000E799DD /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		84EEC0CF16E8491000E799DD /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		84EEC0D216E8491000E799DD /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
-		84EEC0D416E8491000E799DD /* SKViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SKViewController.h; sourceTree = "<group>"; };
-		84EEC0D516E8491000E799DD /* SKViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SKViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -259,10 +265,16 @@
 				84BABF0B16EDAA2D00BDD596 /* SKJoin.m */,
 				84BABF0D16EDAB1300BDD596 /* SKKnowledge.h */,
 				84BABF0E16EDAB1300BDD596 /* SKKnowledge.m */,
+				2CFD6C9C175DC6AD003FF5AF /* SKKnowledgeDetail.h */,
+				2CFD6C9D175DC6AD003FF5AF /* SKKnowledgeDetail.m */,
 				8410D39A1739FA0D00DA74B2 /* SKMapDetail.h */,
 				8410D39B1739FA0D00DA74B2 /* SKMapDetail.m */,
 				84239467173967D100C42158 /* SKJoinDetail.h */,
 				84239468173967D100C42158 /* SKJoinDetail.m */,
+				2CFD6C9F175E57AB003FF5AF /* SKTeaching.h */,
+				2CFD6CA0175E57AB003FF5AF /* SKTeaching.m */,
+				2CFD6CA2175E5E51003FF5AF /* SKTeachingDetail.h */,
+				2CFD6CA3175E5E52003FF5AF /* SKTeachingDetail.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -405,8 +417,6 @@
 				84EEC0C616E8491000E799DD /* SKAppDelegate.m */,
 				84EEC0CE16E8491000E799DD /* MainStoryboard_iPhone.storyboard */,
 				84EEC0D116E8491000E799DD /* MainStoryboard_iPad.storyboard */,
-				84EEC0D416E8491000E799DD /* SKViewController.h */,
-				84EEC0D516E8491000E799DD /* SKViewController.m */,
 				842BA306173F47280044D6B6 /* Third Party */,
 				842707FE16EF925900C2CC4F /* Images */,
 				84EEC0BD16E8491000E799DD /* Supporting Files */,
@@ -517,7 +527,6 @@
 			files = (
 				84EEC0C316E8491000E799DD /* main.m in Sources */,
 				84EEC0C716E8491000E799DD /* SKAppDelegate.m in Sources */,
-				84EEC0D616E8491000E799DD /* SKViewController.m in Sources */,
 				8412686116EA4F9200A85E65 /* SKFindPlace.m in Sources */,
 				84BABF0C16EDAA2D00BDD596 /* SKJoin.m in Sources */,
 				84BABF0F16EDAB1300BDD596 /* SKKnowledge.m in Sources */,
@@ -545,6 +554,9 @@
 				8410D39C1739FA0D00DA74B2 /* SKMapDetail.m in Sources */,
 				842BA2FE173E46F80044D6B6 /* SKPlaceData.m in Sources */,
 				842BA301173E47020044D6B6 /* SKJoinData.m in Sources */,
+				2CFD6C9E175DC6AE003FF5AF /* SKKnowledgeDetail.m in Sources */,
+				2CFD6CA1175E57AB003FF5AF /* SKTeaching.m in Sources */,
+				2CFD6CA4175E5E52003FF5AF /* SKTeachingDetail.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

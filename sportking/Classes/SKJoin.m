@@ -14,13 +14,11 @@
     FPPopoverController *popover;
 }
 
--(void)changeDisplay;
 -(void)changeKind;
 @end
 
 @implementation SKJoin
 @synthesize table;
-@synthesize map;
 @synthesize hiddenBtn;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -35,11 +33,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
-    [self.navigationController.visibleViewController setTitle:@"揪團"];
-    isShowMap = YES;
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"列表" style:UIBarButtonItemStyleDone target:self action:@selector(changeDisplay)];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"分類" style:UIBarButtonItemStyleDone target:self action:@selector(changeKind)];
+    table.hidden = NO;
+    
+    
+    [self.navigationController.visibleViewController setTitle:@"我的活動"];
+    //self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"分類" style:UIBarButtonItemStyleDone target:self action:@selector(changeKind)];
+    
+    
     
     peoples = [[NSMutableArray alloc] initWithObjects:@"1/4",@"3 / 4",@" 3 / 4",@"1 / 2",@"7 / 12",@"0 / 4", nil];
     names = [[NSMutableArray alloc] initWithObjects:@"一起打球吧！",@"籃球菜鳥找新手帶",@"籃球四缺一",@"鬥牛二缺一",@"神手欠人電",@"快樂打籃球", nil];
@@ -83,64 +83,11 @@
     
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
     
-    [self.navigationController.visibleViewController setTitle:@"活動"];
+    [self.navigationController.visibleViewController setTitle:@"我的活動"];
     UIViewController* FirstViewController = [storyboard instantiateViewControllerWithIdentifier:@"SKJoinDetail"];
     
     [self.navigationController pushViewController:FirstViewController animated:YES];
-
-}
-
-#pragma mark - map
-
--(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation{
     
-    //取得現在位置
-    double X = userLocation.location.coordinate.latitude;
-    double Y = userLocation.location.coordinate.longitude;
-    
-    NSLog(@"現在位置   x:%f  y:%f",X,Y);
-    
-    //自行定義的設定地圖函式
-    //    [self setMapRegionLongitude:Y andLatitude:X withLongitudeSpan:0.05 andLatitudeSpan:0.05];
-    CLLocationCoordinate2D mapCenter;
-    mapCenter.latitude = X;
-    mapCenter.longitude = Y;
-    
-    //Map Zoom設定
-    MKCoordinateSpan mapSpan;
-    mapSpan.latitudeDelta = 0.05;
-    mapSpan.longitudeDelta = 0.05;
-    
-    //設定地圖顯示位置
-    MKCoordinateRegion mapRegion;
-    mapRegion.center = mapCenter;
-    mapRegion.span = mapSpan;
-    
-    //前往顯示位置
-    [mapView setRegion:mapRegion];
-    [mapView regionThatFits:mapRegion];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-#pragma mark -other
-
--(void)changeDisplay{
-    if(isShowMap){
-        isShowMap = NO;
-        map.hidden = YES;
-        table.hidden = NO;
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"地圖" style:UIBarButtonItemStyleDone target:self action:@selector(changeDisplay)];
-    }else{
-        isShowMap = YES;
-        map.hidden = NO;
-        table.hidden = YES;
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"列表" style:UIBarButtonItemStyleDone target:self action:@selector(changeDisplay)];
-    }
 }
 
 -(void)changeKind{
