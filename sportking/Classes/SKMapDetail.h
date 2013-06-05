@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface SKMapDetail : UIViewController{
-    
+    NSMutableArray *names;
 }
 @property(nonatomic,readwrite,retain)IBOutlet UILabel *sitename;
 

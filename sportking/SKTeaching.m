@@ -1,26 +1,24 @@
 //
-//  SKJoin.m
+//  SKTeaching.m
 //  sportking
 //
-//  Created by yang on 13/3/11.
+//  Created by Ruei Yan, Huang on 13/6/5.
 //  Copyright (c) 2013年 yang. All rights reserved.
 //
 
-#import "SKJoin.h"
-#import "sportcell.h"
+#import "SKTeaching.h"
 #import "SKSelectKind.h"
 #import "FPPopoverController.h"
-@interface SKJoin ()<selectKindDelegate>{
+
+@interface SKTeaching ()<selectKindDelegate>{
+    
     FPPopoverController *popover;
 }
 
--(void)changeKind;
 @end
 
-@implementation SKJoin
-@synthesize table;
+@implementation SKTeaching
 @synthesize hiddenBtn;
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -33,23 +31,21 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    table.hidden = NO;
+	// Do any additional setup after loading the view.
+    [self.navigationController.visibleViewController setTitle:@"教學"];
     
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"分類" style:UIBarButtonItemStyleDone target:self action:@selector(changeKind)];
     
-    [self.navigationController.visibleViewController setTitle:@"我的活動"];
-    //self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"分類" style:UIBarButtonItemStyleDone target:self action:@selector(changeKind)];
-    
-    
-    
-    peoples = [[NSMutableArray alloc] initWithObjects:@"1/4",@"3 / 4",@" 3 / 4",@"1 / 2",@"7 / 12",@"0 / 4", nil];
-    names = [[NSMutableArray alloc] initWithObjects:@"一起打球吧！",@"籃球菜鳥找新手帶",@"籃球四缺一",@"鬥牛二缺一",@"神手欠人電",@"快樂打籃球", nil];
-    descripts = [[NSMutableArray alloc] initWithObjects:@"台北大安區   距離 1 km",
-                 @"新北永和區   距離 3 km",
-                 @"台北大安區   距離 5 km",
-                 @"新北板橋區   距離 15 km",
-                 @"桃園中壢市  距離 37 km",@"新竹竹北市   距離 72 km", nil];
-
+    //暫時的
+    names = [[NSMutableArray alloc] initWithObjects:@"教學1",@"教學2",@"教學3",@"教學4",@"教學5",@"教學6", nil];
 }
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
 #pragma mark -tableView delegate
 
 -(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView{
@@ -61,33 +57,38 @@
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    static NSString *CellIdentifier = @"Cell";
     
-    static NSString *CellIdentifier = @"sportcell";
+    //try to get a reusable cell
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    sportcell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        NSArray* nibObjs = [[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:nil options:nil];
-        cell = [nibObjs objectAtIndex:0];
+    //create new cell if no reusable cell is available
+    if(cell == nil){
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
+    NSString *cellValue = [names objectAtIndex:indexPath.row];
+    cell.textLabel.text = cellValue;
     
-    cell.people.text = [peoples objectAtIndex:indexPath.row];
-    cell.name.text = [names objectAtIndex:indexPath.row];
-    cell.descript.text = [descripts objectAtIndex:indexPath.row];
+    
     return cell;
+    
 }
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
     
-    [self.navigationController.visibleViewController setTitle:@"我的活動"];
-    UIViewController* FirstViewController = [storyboard instantiateViewControllerWithIdentifier:@"SKJoinDetail"];
+    [self.navigationController.visibleViewController setTitle:@"教學"];
+    UIViewController* FirstViewController = [storyboard instantiateViewControllerWithIdentifier:@"SKTeachingDetail"];
     
     [self.navigationController pushViewController:FirstViewController animated:YES];
     
+    //[self embedYouTube:@"http://www.youtube.com/watch?v=l3Iwh5hqbyE" frame:CGRectMake(20, 20, 100, 100)];
+    //[self embedYouTube];
 }
 
 -(void)changeKind{
@@ -119,6 +120,12 @@
     [popover dismissPopoverAnimated:YES];
 }
 
-
-
+- (void)dealloc {
+    [_table release];
+    [super dealloc];
+}
+- (void)viewDidUnload {
+    [self setTable:nil];
+    [super viewDidUnload];
+}
 @end

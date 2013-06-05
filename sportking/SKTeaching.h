@@ -1,18 +1,17 @@
 //
-//  SKKnowledge.h
+//  SKTeaching.h
 //  sportking
 //
-//  Created by yang on 13/3/11.
+//  Created by Ruei Yan, Huang on 13/6/5.
 //  Copyright (c) 2013年 yang. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface SKKnowledge : UIViewController{
+@interface SKTeaching : UIViewController{
     NSMutableArray *names;
 }
+
 @property(nonatomic,readwrite,retain)IBOutlet UIButton *hiddenBtn;
 @property (retain, nonatomic) IBOutlet UITableView *table;
-
-
 @end
