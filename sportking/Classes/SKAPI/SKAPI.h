@@ -25,7 +25,9 @@
 
 @interface SKAPI : NSObject{
     id<SKAPIDelegate> delegate;
+    NSString *userID_;
 }
+@property(nonatomic,readwrite,retain)NSString *userID;
 @property (nonatomic, readwrite, retain)id<SKAPIDelegate> delegate;
 
 /* Share System*/

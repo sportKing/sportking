@@ -93,7 +93,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kol-Qw-SbT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2281" y="-1078"/>
+            <point key="canvasLocation" x="1905" y="-405"/>
         </scene>
         <!--Map Detail-->
         <scene sceneID="Df2-Eq-D2F">
@@ -156,35 +156,6 @@
             </objects>
             <point key="canvasLocation" x="-221" y="-783"/>
         </scene>
-        <!--Join-->
-        <scene sceneID="PH5-gp-jT0">
-            <objects>
-                <viewController id="ehN-Nv-pFP" customClass="SKJoin" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="V7L-9e-vVa">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="tth-VG-Rwk">
-                                <rect key="frame" x="0.0" y="12" width="320" height="455"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="ehN-Nv-pFP" id="hco-YA-UBL"/>
-                                    <outlet property="delegate" destination="ehN-Nv-pFP" id="gg0-oy-KWc"/>
-                                </connections>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <toolbarItems/>
-                    <navigationItem key="navigationItem" id="S0f-VA-7SS"/>
-                    <connections>
-                        <outlet property="table" destination="tth-VG-Rwk" id="rZl-FQ-5kL"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="UIW-GV-6rb" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="837" y="2148"/>
-        </scene>
         <!--Teaching Detail-->
         <scene sceneID="Pez-hH-Ifb">
             <objects>
@@ -211,7 +182,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ccz-Ma-0u9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2301" y="1101"/>
+            <point key="canvasLocation" x="2281" y="753"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="PiO-Ac-MCb">
@@ -268,11 +239,11 @@
             </objects>
             <point key="canvasLocation" x="605" y="-772"/>
         </scene>
-        <!--Navigation Controller - 我的活動-->
+        <!--Navigation Controller - 活動-->
         <scene sceneID="o9D-rS-fUh">
             <objects>
                 <navigationController storyboardIdentifier="SKJoin" id="jxs-s7-gxD" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="我的活動" id="0VB-r9-TaB"/>
+                    <tabBarItem key="tabBarItem" title="活動" id="0VB-r9-TaB"/>
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="AId-f2-tAZ">
@@ -281,7 +252,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="ehN-Nv-pFP" kind="relationship" relationship="rootViewController" id="Wbz-cH-EeH"/>
+                        <segue destination="ljA-iy-cmz" kind="relationship" relationship="rootViewController" id="9VS-vL-sgQ"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a9w-iW-QYY" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -356,7 +327,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QJm-D7-XUA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2281" y="331"/>
+            <point key="canvasLocation" x="2281" y="185"/>
         </scene>
         <!--Knowledge-->
         <scene sceneID="gtw-5V-E9b">
@@ -484,17 +455,211 @@
             </objects>
             <point key="canvasLocation" x="1075" y="551"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="dLX-Af-N95">
+            <objects>
+                <viewController id="CTJ-Mt-Mm0" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="pOC-Xv-g9A">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="bg.jpg" id="He3-By-Je3">
+                                <rect key="frame" x="0.0" y="63" width="320" height="417"/>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="登入Facebook" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="o0T-qR-9At">
+                                <rect key="frame" x="95" y="75" width="130" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="使用活動功能必須先登入Facebook" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DLI-DI-XBP">
+                                <rect key="frame" x="20" y="141" width="272" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="426-iS-fWl">
+                                <rect key="frame" x="36" y="249" width="240" height="46"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="fb-login.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XvL-mS-LbE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1911" y="753"/>
+        </scene>
+        <!--Join-->
+        <scene sceneID="wYn-u0-lu0">
+            <objects>
+                <viewController storyboardIdentifier="SKJoin" id="ljA-iy-cmz" customClass="SKJoin" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zld-r4-qag">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="bg.jpg" id="dJl-rv-hSS">
+                                <rect key="frame" x="0.0" y="43" width="320" height="387"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tpA-eK-NCk">
+                                <rect key="frame" x="69" y="12" width="183" height="23"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Jo2-Cz-keL">
+                                <rect key="frame" x="244" y="8" width="56" height="34"/>
+                                <state key="normal" title="辦活動">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="8P9-7K-Uhz">
+                                <rect key="frame" x="20" y="88" width="272" height="329"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="ljA-iy-cmz" id="HK9-n8-744"/>
+                                    <outlet property="delegate" destination="ljA-iy-cmz" id="d4H-r2-ZeT"/>
+                                </connections>
+                            </tableView>
+                            <imageView userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="basketball.png" id="DZV-5f-YYu">
+                                <rect key="frame" x="270" y="70" width="40" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="pTX-2I-ZuO">
+                                <rect key="frame" x="0.0" y="70" width="40" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="add.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="addActivity:" destination="ljA-iy-cmz" eventType="touchUpInside" id="DiK-uC-sE5"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="gBR-fc-bEo">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="AhB-Cj-Byo">
+                            <button key="customView" hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="3Kc-Ph-WHB">
+                                <rect key="frame" x="16" y="5" width="71" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title=" ">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
+                    <connections>
+                        <outlet property="hiddenBtn" destination="3Kc-Ph-WHB" id="tXO-zL-Eg6"/>
+                        <outlet property="sportImg" destination="DZV-5f-YYu" id="MaI-v9-m9y"/>
+                        <outlet property="table" destination="8P9-7K-Uhz" id="kHQ-Cl-3qA"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HD5-5S-10o" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="891" y="2148"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="EYE-rp-WKK">
+            <objects>
+                <viewController id="bax-BN-OA4" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Aah-gX-HQy">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="bg.jpg" id="03a-qz-tHd">
+                                <rect key="frame" x="0.0" y="63" width="320" height="417"/>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="建立活動" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tV1-Gq-2sj">
+                                <rect key="frame" x="121" y="75" width="78" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="a9Z-2s-01G" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1887" y="177"/>
+        </scene>
+        <!--Teaching - 我的活動-->
+        <scene sceneID="zXf-aa-Vn8">
+            <objects>
+                <viewController storyboardIdentifier="SKTeaching" id="PdY-KK-TMi" customClass="SKTeaching" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="7jU-o1-UxW">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="bg.jpg" id="bi6-ud-4sK">
+                                <rect key="frame" x="0.0" y="43" width="320" height="387"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ncL-fh-IZ0">
+                                <rect key="frame" x="69" y="12" width="183" height="23"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="yiK-8A-ZAs">
+                                <rect key="frame" x="244" y="8" width="56" height="34"/>
+                                <state key="normal" title="辦活動">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="2TV-Ba-UBp">
+                                <rect key="frame" x="20" y="88" width="272" height="329"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="PdY-KK-TMi" id="sh3-8e-vZR"/>
+                                    <outlet property="delegate" destination="PdY-KK-TMi" id="EER-eq-quf"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="我的活動" id="VXZ-By-Jfp">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="jDJ-av-nFM">
+                            <button key="customView" hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="MPv-vi-CbM">
+                                <rect key="frame" x="16" y="5" width="71" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title=" ">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
+                    <connections>
+                        <outlet property="hiddenBtn" destination="MPv-vi-CbM" id="iei-wg-Q1j"/>
+                        <outlet property="table" destination="2TV-Ba-UBp" id="EOz-uz-xXk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HLn-K5-U0l" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1541" y="177"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="add.png" width="256" height="256"/>
         <image name="basketball.png" width="1529" height="1529"/>
-        <image name="basketball.png" width="1529" height="1529"/>
-        <image name="basketball.png" width="1529" height="1529"/>
         <image name="bg.jpg" width="320" height="480"/>
-        <image name="bg.jpg" width="320" height="480"/>
-        <image name="bg.jpg" width="320" height="480"/>
-        <image name="bg.jpg" width="320" height="480"/>
-        <image name="bg.jpg" width="320" height="480"/>
-        <image name="bg.jpg" width="320" height="480"/>
+        <image name="fb-login.png" width="346" height="50"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

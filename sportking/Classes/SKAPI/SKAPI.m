@@ -12,6 +12,7 @@
 
 @implementation SKAPI
 @synthesize delegate;
+@synthesize userID = userID_;
 static SKAPI* sharedSKAPI = nil;
 NSString *const API_URL = @"http://huang-yao-building.com/db/API.php";
 
@@ -25,7 +26,7 @@ NSString *const API_URL = @"http://huang-yao-building.com/db/API.php";
 -(id)init{
     self = [super init];
     if (self) {
-        
+        self.userID = [[NSUserDefaults standardUserDefaults] objectForKey:@"SK_USERID"];
     }
     return self;
 }

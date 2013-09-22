@@ -14,3 +14,4 @@
 #endif
 
 #define DEBUG_MODE
+#define defaults [NSUserDefaults standardUserDefaults]

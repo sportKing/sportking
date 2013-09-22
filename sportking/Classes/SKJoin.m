@@ -20,6 +20,7 @@
 @implementation SKJoin
 @synthesize table;
 @synthesize hiddenBtn;
+@synthesize sportImg;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -38,7 +39,6 @@
     
     [self.navigationController.visibleViewController setTitle:@"我的活動"];
     //self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"分類" style:UIBarButtonItemStyleDone target:self action:@selector(changeKind)];
-    
     
     
     peoples = [[NSMutableArray alloc] initWithObjects:@"1/4",@"3 / 4",@" 3 / 4",@"1 / 2",@"7 / 12",@"0 / 4", nil];
@@ -117,8 +117,35 @@
 -(void)selectKindDidFinish:(int)kind{
     NSLog(@"%d",kind);
     [popover dismissPopoverAnimated:YES];
+    NSString *image = nil;
+    switch (kind) {
+        case 1:
+            image = @"basketball.png";
+            break;
+        case 2:
+            image = @"soccer.png";
+            break;
+        case 3:
+            image = @"badminton.png";
+            break;
+        case 4:
+            image = @"baseball.png";
+            break;
+        case 5:
+            image = @"tennis.png";
+            break;
+        case 6:
+            image = @"volleyball.png";
+            break;
+        default:
+            break;
+    }
+    self.sportImg.image = [UIImage imageNamed:image];
+
 }
 
 
-
+-(IBAction)addActivity:(id)sender{
+    
+}
 @end
