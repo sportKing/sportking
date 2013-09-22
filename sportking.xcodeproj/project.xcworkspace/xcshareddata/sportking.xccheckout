@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>E64FD6E9-AF0B-4167-A06F-97B26F414D8B</string>
+	<key>IDESourceControlProjectName</key>
+	<string>sportking</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>883402AB-9F02-4EB1-92AB-29C29010B294</key>
+		<string>https://github.com/sportKing/sportking.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>sportking.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>883402AB-9F02-4EB1-92AB-29C29010B294</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/sportKing/sportking.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>883402AB-9F02-4EB1-92AB-29C29010B294</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>883402AB-9F02-4EB1-92AB-29C29010B294</string>
+			<key>IDESourceControlWCCName</key>
+			<string>sportking</string>
+		</dict>
+	</array>
+</dict>
+</plist>

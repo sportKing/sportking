@@ -10,8 +10,10 @@
 
 @interface SKTeaching : UIViewController{
     NSMutableArray *names;
+    NSMutableArray *teachDatas;
 }
 
 @property(nonatomic,readwrite,retain)IBOutlet UIButton *hiddenBtn;
 @property (retain, nonatomic) IBOutlet UITableView *table;
+@property(nonatomic,readwrite,retain)IBOutlet UIImageView *sportImg;
 @end

@@ -62,13 +62,13 @@
 		8427082D16EF9AE800C2CC4F /* SKSelectKind.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8427082B16EF9AE800C2CC4F /* SKSelectKind.xib */; };
 		842BA2FE173E46F80044D6B6 /* SKPlaceData.m in Sources */ = {isa = PBXBuildFile; fileRef = 842BA2FD173E46F80044D6B6 /* SKPlaceData.m */; };
 		842BA301173E47020044D6B6 /* SKJoinData.m in Sources */ = {isa = PBXBuildFile; fileRef = 842BA300173E47020044D6B6 /* SKJoinData.m */; };
-		842BA303173F32830044D6B6 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 842BA302173F32830044D6B6 /* Social.framework */; };
 		842BA305173F37F40044D6B6 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 842BA304173F37F40044D6B6 /* Accounts.framework */; };
 		8436EE79175E5A6800BB34AF /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 8436EE70175E5A6800BB34AF /* NSObject+SBJSON.m */; };
 		8436EE7A175E5A6800BB34AF /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 8436EE72175E5A6800BB34AF /* NSString+SBJSON.m */; };
 		8436EE7B175E5A6800BB34AF /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 8436EE74175E5A6800BB34AF /* SBJsonBase.m */; };
 		8436EE7C175E5A6800BB34AF /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8436EE76175E5A6800BB34AF /* SBJsonParser.m */; };
 		8436EE7D175E5A6800BB34AF /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8436EE78175E5A6800BB34AF /* SBJsonWriter.m */; };
+		845C7328179C163800748ED6 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 842BA302173F32830044D6B6 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		84BABF0C16EDAA2D00BDD596 /* SKJoin.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BABF0B16EDAA2D00BDD596 /* SKJoin.m */; };
 		84BABF0F16EDAB1300BDD596 /* SKKnowledge.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BABF0E16EDAB1300BDD596 /* SKKnowledge.m */; };
 		84EEC0B716E8491000E799DD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84EEC0B616E8491000E799DD /* UIKit.framework */; };
@@ -213,8 +213,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				845C7328179C163800748ED6 /* Social.framework in Frameworks */,
 				842BA305173F37F40044D6B6 /* Accounts.framework in Frameworks */,
-				842BA303173F32830044D6B6 /* Social.framework in Frameworks */,
 				2CE00FBB1739970D0007C0CC /* libxml2.dylib in Frameworks */,
 				2CE00FB9173997040007C0CC /* libz.dylib in Frameworks */,
 				84EEC0BB16E8491000E799DD /* CoreGraphics.framework in Frameworks */,
@@ -464,8 +464,6 @@
 				84EEC0C616E8491000E799DD /* SKAppDelegate.m */,
 				84EEC0CE16E8491000E799DD /* MainStoryboard_iPhone.storyboard */,
 				84EEC0D116E8491000E799DD /* MainStoryboard_iPad.storyboard */,
-				84EEC0D416E8491000E799DD /* SKViewController.h */,
-				84EEC0D516E8491000E799DD /* SKViewController.m */,
 				8436EE6D175E5A6800BB34AF /* JSON */,
 				842BA306173F47280044D6B6 /* Third Party */,
 				842707FE16EF925900C2CC4F /* Images */,

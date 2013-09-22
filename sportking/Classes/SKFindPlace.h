@@ -20,5 +20,6 @@
 @property(nonatomic,readwrite,retain)IBOutlet UITableView *table;
 @property(nonatomic,readwrite,retain)IBOutlet MKMapView *map;
 @property(nonatomic,readwrite,retain)IBOutlet UIButton *hiddenBtn;
+@property(nonatomic,readwrite,retain)IBOutlet UIImageView *sportImg;
 
 @end

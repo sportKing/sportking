@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface SKTeachingDetail : UIViewController
-@property (retain, nonatomic) IBOutlet UILabel *label;
+@property (retain, nonatomic) IBOutlet UIWebView *webview;
+@property (nonatomic,readwrite,retain)NSString *videourl;
+- (void)embedYouTube:(NSString*)url;
 
 @end

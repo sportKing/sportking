@@ -9,8 +9,10 @@
 #import "SKTeaching.h"
 #import "SKSelectKind.h"
 #import "FPPopoverController.h"
+#import "SKAPI.h"
+#import "SKTeachingDetail.h"
 
-@interface SKTeaching ()<selectKindDelegate>{
+@interface SKTeaching ()<selectKindDelegate,SKAPIDelegate>{
     
     FPPopoverController *popover;
 }
@@ -19,6 +21,9 @@
 
 @implementation SKTeaching
 @synthesize hiddenBtn;
+@synthesize table;
+@synthesize sportImg;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -37,7 +42,11 @@
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"分類" style:UIBarButtonItemStyleDone target:self action:@selector(changeKind)];
     
     //暫時的
-    names = [[NSMutableArray alloc] initWithObjects:@"教學1",@"教學2",@"教學3",@"教學4",@"教學5",@"教學6", nil];
+//    names = [[NSMutableArray alloc] initWithObjects:@"教學1",@"教學2",@"教學3",@"教學4",@"教學5",@"教學6", nil];
+    teachDatas = [[NSMutableArray alloc] init];
+    
+    [[SKAPI sharedSKAPI] setDelegate:self];
+    [[SKAPI sharedSKAPI] getTeachDataByKind:1];
 }
 
 - (void)didReceiveMemoryWarning
@@ -53,7 +62,7 @@
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [names count];
+    return [teachDatas count];
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -66,9 +75,11 @@
     if(cell == nil){
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
-    NSString *cellValue = [names objectAtIndex:indexPath.row];
-    cell.textLabel.text = cellValue;
     
+    NSDictionary *dic = [teachDatas objectAtIndex:indexPath.row];
+    
+    NSString *cellValue = [dic objectForKey:@"skill_name"];
+    cell.textLabel.text = cellValue;
     
     return cell;
     
@@ -83,9 +94,15 @@
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
     
     [self.navigationController.visibleViewController setTitle:@"教學"];
-    UIViewController* FirstViewController = [storyboard instantiateViewControllerWithIdentifier:@"SKTeachingDetail"];
+    SKTeachingDetail* teach = [storyboard instantiateViewControllerWithIdentifier:@"SKTeachingDetail"];
     
-    [self.navigationController pushViewController:FirstViewController animated:YES];
+    NSDictionary *dic = [teachDatas objectAtIndex:indexPath.row];
+    
+    
+    [self.navigationController pushViewController:teach animated:YES];
+    [teach.navigationItem setTitle:[dic objectForKey:@"skill_name"]];
+    [teach setVideourl:[dic objectForKey:@"link"]];
+//    [teach embedYouTube:[dic objectForKey:@"link"]];
     
     //[self embedYouTube:@"http://www.youtube.com/watch?v=l3Iwh5hqbyE" frame:CGRectMake(20, 20, 100, 100)];
     //[self embedYouTube];
@@ -116,16 +133,55 @@
 }
 
 -(void)selectKindDidFinish:(int)kind{
-    NSLog(@"%d",kind);
+//    NSLog(@"%d",kind);
+    [[SKAPI sharedSKAPI] getTeachDataByKind:kind];
     [popover dismissPopoverAnimated:YES];
+    NSString *image = nil;
+    switch (kind) {
+        case 1:
+            image = @"basketball.png";
+            break;
+        case 2:
+            image = @"soccer.png";
+            break;
+        case 3:
+            image = @"badminton.png";
+            break;
+        case 4:
+            image = @"baseball.png";
+            break;
+        case 5:
+            image = @"tennis.png";
+            break;
+        case 6:
+            image = @"volleyball.png";
+            break;
+        default:
+            break;
+    }
+    
+    self.sportImg.image = [UIImage imageNamed:image];
+    
 }
 
 - (void)dealloc {
-    [_table release];
+    [table release];
     [super dealloc];
 }
 - (void)viewDidUnload {
     [self setTable:nil];
     [super viewDidUnload];
+}
+
+#pragma mark - api delegate
+-(void)SKAPI:(SKAPI *)skAPI didGetTeachData:(NSDictionary *)result{
+    
+    [teachDatas removeAllObjects];
+    
+    for (NSDictionary *dic in result) {
+        [teachDatas addObject:dic];
+    }
+    [table reloadData];
+    
 }
 @end

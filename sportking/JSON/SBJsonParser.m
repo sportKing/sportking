@@ -84,10 +84,10 @@ static char ctrl[0x22];
     }
     
     // We found some valid JSON. But did it also contain something else?
-    if (![self scanIsAtEnd]) {
-        [self addErrorWithCode:ETRAILGARBAGE description:@"Garbage after JSON"];
-        return nil;
-    }
+//    if (![self scanIsAtEnd]) {
+//        [self addErrorWithCode:ETRAILGARBAGE description:@"Garbage after JSON"];
+//        return nil;
+//    }
     
     NSAssert1(o, @"Should have a valid object from %@", repr);
     

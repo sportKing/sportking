@@ -5,12 +5,12 @@
 
 @interface BDKNotifyHUD : UIView
 
-@property (nonatomic) CGFloat destinationOpacity;
-@property (nonatomic) CGFloat currentOpacity;
-@property (nonatomic) UIView *iconView;
-@property (nonatomic) CGFloat roundness;
-@property (nonatomic) BOOL bordered;
-@property (nonatomic) BOOL isAnimating;
+@property (nonatomic,assign) CGFloat destinationOpacity;
+@property (nonatomic,assign) CGFloat currentOpacity;
+@property (nonatomic,retain) UIView *iconView;
+@property (nonatomic,assign) CGFloat roundness;
+@property (nonatomic,assign) BOOL bordered;
+@property (nonatomic,assign) BOOL isAnimating;
 
 @property (strong, nonatomic) UIColor *borderColor;
 @property (strong, nonatomic) NSString *text;

@@ -89,7 +89,7 @@
         }];
         
         
-        self.contentSize = CGSizeMake(200, 300); //default size
+        self.contentSize = CGSizeMake(200, 220); //default size
 
         _contentView = [[FPPopoverView alloc] initWithFrame:CGRectMake(0, 0, 
                                               self.contentSize.width, self.contentSize.height)];

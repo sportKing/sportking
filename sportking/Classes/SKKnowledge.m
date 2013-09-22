@@ -9,8 +9,10 @@
 #import "SKKnowledge.h"
 #import "SKSelectKind.h"
 #import "FPPopoverController.h"
-@interface SKKnowledge ()<selectKindDelegate>{
-    
+#import "SKAPI.h"
+#import "SKKnowledgeDetail.h"
+
+@interface SKKnowledge ()<selectKindDelegate,SKAPIDelegate>{
     FPPopoverController *popover;
 }
 
@@ -18,6 +20,8 @@
 
 @implementation SKKnowledge
 @synthesize hiddenBtn;
+@synthesize table;
+@synthesize sportImg;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -37,7 +41,9 @@
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"分類" style:UIBarButtonItemStyleDone target:self action:@selector(changeKind)];
     
     //暫時的
-    names = [[NSMutableArray alloc] initWithObjects:@"知識1",@"知識2",@"知識3",@"知識4",@"知識5",@"知識6", nil];
+    knowledgeDatas = [[NSMutableArray alloc] init];
+    [[SKAPI sharedSKAPI] setDelegate:self];
+    [[SKAPI sharedSKAPI] getRuleDataByKind:1];
     
 }
 
@@ -54,7 +60,7 @@
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [names count];
+    return [knowledgeDatas count];
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -67,7 +73,9 @@
     if(cell == nil){
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
-    NSString *cellValue = [names objectAtIndex:indexPath.row];
+    NSDictionary *dic = [knowledgeDatas objectAtIndex:indexPath.row];
+    
+    NSString *cellValue = [dic objectForKey:@"rule_name"];
     cell.textLabel.text = cellValue;
     
     
@@ -84,12 +92,14 @@
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
     
     [self.navigationController.visibleViewController setTitle:@"知識"];
-    UIViewController* FirstViewController = [storyboard instantiateViewControllerWithIdentifier:@"SKKnowledgeDetail"];
+    SKKnowledgeDetail* knowledge = [storyboard instantiateViewControllerWithIdentifier:@"SKKnowledgeDetail"];
     
-    [self.navigationController pushViewController:FirstViewController animated:YES];
+    NSDictionary *dic = [knowledgeDatas objectAtIndex:indexPath.row];
     
-    //[self embedYouTube:@"http://www.youtube.com/watch?v=l3Iwh5hqbyE" frame:CGRectMake(20, 20, 100, 100)];
-    //[self embedYouTube];
+    [self.navigationController pushViewController:knowledge animated:YES];
+    [knowledge.navigationItem setTitle:[dic objectForKey:@"rule_name"]];
+    [knowledge setRule:[dic objectForKey:@"rule"]];
+    
 }
 
 -(void)changeKind{
@@ -117,16 +127,53 @@
 }
 
 -(void)selectKindDidFinish:(int)kind{
-    NSLog(@"%d",kind);
+    [[SKAPI sharedSKAPI] getRuleDataByKind:kind];
     [popover dismissPopoverAnimated:YES];
+    NSString *image = nil;
+    switch (kind) {
+        case 1:
+            image = @"basketball.png";
+            break;
+        case 2:
+            image = @"soccer.png";
+            break;
+        case 3:
+            image = @"badminton.png";
+            break;
+        case 4:
+            image = @"baseball.png";
+            break;
+        case 5:
+            image = @"tennis.png";
+            break;
+        case 6:
+            image = @"volleyball.png";
+            break;
+        default:
+            break;
+    }
+    
+    self.sportImg.image = [UIImage imageNamed:image];
+    
 }
 
 - (void)dealloc {
-    [_table release];
+    [table release];
     [super dealloc];
 }
 - (void)viewDidUnload {
     [self setTable:nil];
     [super viewDidUnload];
 }
+#pragma mark -api delegate
+-(void)SKAPI:(SKAPI *)skAPI didGetRuleData:(NSDictionary *)result{
+    [knowledgeDatas removeAllObjects];
+    
+    for (NSDictionary *dic in result) {
+        [knowledgeDatas addObject:dic];
+    }
+    [table reloadData];
+    
+}
+
 @end

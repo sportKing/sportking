@@ -1,4 +1,4 @@
-/
+//
 //  SKFindPlace.m
 //  sportking
 //
@@ -23,9 +23,10 @@
 
 #import <Social/Social.h>
 #import <Accounts/Accounts.h>
+#import "SKAPI.h"
 
 
-@interface SKFindPlace ()<selectKindDelegate>{
+@interface SKFindPlace ()<selectKindDelegate,SKAPIDelegate>{
     FPPopoverController *popover;
     
     NSMutableArray *_annotationList;
@@ -44,6 +45,7 @@
 @synthesize table;
 @synthesize map;
 @synthesize hiddenBtn;
+@synthesize sportImg;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -74,25 +76,25 @@
     name = [[NSMutableArray alloc] initWithObjects:@"台科大室內籃球場",@"台大籃球場",@"民族國中",@"公館國小",@"大安森林公園",@"世新籃球場",@"青年公園籃球場",@"板球體育館籃球場",@"內湖籃球場", nil];
     position = [[NSMutableArray alloc] initWithObjects:@"距離 0 km",@"距離 0.2 km",@"距離 0.2 km",@"距離 0.5 km",@"距離 4 km",@"距離 5 km",@"距離 12 km",@"距離 15 km",@"距離 20 km", nil];
     
-    ACAccountStore *account = [[ACAccountStore alloc] init];
-    ACAccountType *accountType = [account accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
-    NSArray *accounts = [account
-                         accountsWithAccountType:accountType];
-    ACAccount *facebookAccount = [accounts lastObject];
-    NSString *acessToken = [NSString stringWithFormat:@"%@",facebookAccount.credential.oauthToken];
-    NSDictionary *parameters = @{@"access_token": acessToken};
-    NSURL *feedURL = [NSURL URLWithString:@"https://graph.facebook.com/me/friends"];
-    SLRequest *feedRequest = [SLRequest
-                              requestForServiceType:SLServiceTypeFacebook
-                              requestMethod:SLRequestMethodGET
-                              URL:feedURL
-                              parameters:parameters];
-    feedRequest.account = facebookAccount;
-    [feedRequest performRequestWithHandler:^(NSData *responseData,
-                                             NSHTTPURLResponse *urlResponse, NSError *error)
-     {
-         NSLog(@"%@",[[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding]);
-     }];
+//    ACAccountStore *account = [[ACAccountStore alloc] init];
+//    ACAccountType *accountType = [account accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
+//    NSArray *accounts = [account
+//                         accountsWithAccountType:accountType];
+//    ACAccount *facebookAccount = [accounts lastObject];
+//    NSString *acessToken = [NSString stringWithFormat:@"%@",facebookAccount.credential.oauthToken];
+//    NSDictionary *parameters = @{@"access_token": acessToken};
+//    NSURL *feedURL = [NSURL URLWithString:@"https://graph.facebook.com/me/friends"];
+//    SLRequest *feedRequest = [SLRequest
+//                              requestForServiceType:SLServiceTypeFacebook
+//                              requestMethod:SLRequestMethodGET
+//                              URL:feedURL
+//                              parameters:parameters];
+//    feedRequest.account = facebookAccount;
+//    [feedRequest performRequestWithHandler:^(NSData *responseData,
+//                                             NSHTTPURLResponse *urlResponse, NSError *error)
+//     {
+//         NSLog(@"%@",[[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding]);
+//     }];
     
 }
 
@@ -124,7 +126,7 @@
         cell = [nibObjs objectAtIndex:0];
     }
     NSDictionary *dic = [placeDic objectAtIndex:[indexPath row]];
-    cell.name.text = [name objectAtIndex:indexPath.row];//[dic objectForKey:@"sitename"];
+    cell.name.text = [dic objectForKey:@"sitename"];
     cell.position.text = [NSString stringWithFormat:@"距離 %f 公里",
                           [[dic objectForKey:@"distance"] floatValue]];
     return cell;
@@ -149,6 +151,12 @@
 
 -(void)setAnnotionsWithList:(NSArray *)list
 {
+    //先清除原先的
+    NSMutableArray * annotationsToRemove = [map.annotations mutableCopy ] ;
+    [annotationsToRemove removeObject:map.userLocation ] ;
+    [map removeAnnotations:annotationsToRemove ] ;
+    
+    //在新增
     for (NSDictionary *dic in list) {
         
         CLLocationDegrees latitude=[[dic objectForKey:@"latitude"] doubleValue];
@@ -268,7 +276,6 @@
     
     NSLog(@"現在位置   x:%f  y:%f",X,Y);
     
-    
     //自行定義的設定地圖函式
     //    [self setMapRegionLongitude:Y andLatitude:X withLongitudeSpan:0.05 andLatitudeSpan:0.05];
     CLLocationCoordinate2D mapCenter;
@@ -330,29 +337,47 @@
 }
 
 -(void)selectKindDidFinish:(int)kind{
-    NSLog(@"%d",kind);
+//    NSLog(@"%d",kind);
     [popover dismissPopoverAnimated:YES];
-    NSURL* url = [NSURL URLWithString: @"http://huang-yao-building.com/db/API.php"];
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request setPostValue:@"getPlace" forKey:@"method"];
-    [request setPostValue:[NSString stringWithFormat:@"%d",kind] forKey:@"id"];
-    [request setPostValue:[NSString stringWithFormat:@"%f",X] forKey:@"x"];
-    [request setPostValue:[NSString stringWithFormat:@"%f",Y] forKey:@"y"];
-    [request setRequestMethod:@"POST"];
-    [request setDidFinishSelector:@selector(requestDone:)];
-    [request setDidFailSelector:@selector(requestError:)];
-    [request setDelegate:self];
-    [request startAsynchronous];
+    
+    [[SKAPI sharedSKAPI] setDelegate:self];
+    [[SKAPI sharedSKAPI] getPlaceDataByKind:kind X:X Y:Y];
+    NSString *image = nil;
+    switch (kind) {
+        case 1:
+            image = @"basketball.png";
+            break;
+        case 2:
+            image = @"soccer.png";
+            break;
+        case 3:
+            image = @"badminton.png";
+            break;
+        case 4:
+            image = @"baseball.png";
+            break;
+        case 5:
+            image = @"tennis.png";
+            break;
+        case 6:
+            image = @"volleyball.png";
+            break;
+        default:
+            break;
+    }
+    
+    self.sportImg.image = [UIImage imageNamed:image];
+    
+    
 }
 
-- (void)requestDone:(ASIHTTPRequest *)request
-{
-    NSString *response = [request responseString];
-    NSDictionary *JSON = [NSJSONSerialization JSONObjectWithData: [response dataUsingEncoding:NSUTF8StringEncoding] options: NSJSONReadingMutableLeaves error: nil];
+-(void)SKAPI:(SKAPI *)skAPI didGetPlaceData:(NSDictionary *)result{
+    NSLog(@"result:%@",result);
+    
     
     [placeDic removeAllObjects];
     NSMutableArray *arr = [[NSMutableArray alloc]init];
-    for (NSDictionary *dic in JSON) {
+    for (NSDictionary *dic in result) {
         [placeDic addObject:dic];
         NSDictionary *dic1=[NSDictionary dictionaryWithObjectsAndKeys:
                             [dic objectForKey:@"sitename"],@"sitename",
@@ -364,13 +389,7 @@
     [table reloadData];
     
     [self resetAnnitations:arr];
-    
-    NSLog(@"~~~%d   %@",[JSON count],JSON);
-    
 }
-- (void)requestError:(ASIHTTPRequest *)request
-{
-    //NSError *error = [request error];
-    NSLog(@"error");
-}
+
+
 @end

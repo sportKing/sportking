@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface SKKnowledgeDetail : UIViewController<UIWebViewDelegate>
-@property (retain, nonatomic) IBOutlet UIWebView *webView;
-
+@property (retain, nonatomic) IBOutlet UITextView *textView;
+@property(nonatomic,readwrite,retain)NSString *rule;
 
 @end
