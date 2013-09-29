@@ -11,8 +11,7 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import <FacebookSDK/FBSessionTokenCachingStrategy.h>
 
-#warning Need to be filled out in your credentials!!!
-NSString * const kFacebookAppID = @"461239953945314";
+NSString * const kFacebookAppID = @"455200644555363";
 
 
 @implementation FacebookNetwork

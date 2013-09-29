@@ -13,5 +13,7 @@
     #import <Foundation/Foundation.h>
 #endif
 
-#define DEBUG_MODE
 #define defaults [NSUserDefaults standardUserDefaults]
+
+//開啓DEBUT_MODE 會print訊息
+#define DEBUG_MODE

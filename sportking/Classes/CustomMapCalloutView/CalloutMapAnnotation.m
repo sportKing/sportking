@@ -9,7 +9,7 @@
 
 @synthesize latitude = _latitude;
 @synthesize longitude = _longitude;
-@synthesize title,content;
+@synthesize title,content,tag;
 
 - (id)initWithLatitude:(CLLocationDegrees)latitude
 		  andLongitude:(CLLocationDegrees)longitude {

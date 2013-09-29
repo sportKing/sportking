@@ -3,12 +3,12 @@
 	<data>
 		<int key="IBDocument.SystemTarget">1280</int>
 		<string key="IBDocument.SystemVersion">12F37</string>
-		<string key="IBDocument.InterfaceBuilderVersion">4504</string>
+		<string key="IBDocument.InterfaceBuilderVersion">4510</string>
 		<string key="IBDocument.AppKitVersion">1187.39</string>
 		<string key="IBDocument.HIToolboxVersion">626.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">3734.1</string>
+			<string key="NS.object.0">3742</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>IBProxyObject</string>
@@ -45,7 +45,7 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{194, 25}, {20, 20}}</string>
 								<reference key="NSSuperview" ref="652479199"/>
-								<reference key="NSNextKeyView" ref="658287253"/>
+								<reference key="NSNextKeyView" ref="606921901"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -92,7 +92,7 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{10, 4}, {173, 21}}</string>
 								<reference key="NSSuperview" ref="652479199"/>
-								<reference key="NSNextKeyView" ref="988309537"/>
+								<reference key="NSNextKeyView" ref="658287253"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -119,7 +119,7 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{20, 25}, {166, 21}}</string>
 								<reference key="NSSuperview" ref="652479199"/>
-								<reference key="NSNextKeyView" ref="606921901"/>
+								<reference key="NSNextKeyView" ref="988309537"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -286,6 +286,6 @@
 			<string key="NS.key.0">people.png</string>
 			<string key="NS.object.0">{22, 20}</string>
 		</object>
-		<string key="IBCocoaTouchPluginVersion">3734.1</string>
+		<string key="IBCocoaTouchPluginVersion">3742</string>
 	</data>
 </archive>

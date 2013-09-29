@@ -26,8 +26,12 @@
 @interface SKAPI : NSObject{
     id<SKAPIDelegate> delegate;
     NSString *userID_;
+    NSString *userName_;
+    NSMutableArray *activitys_;
 }
 @property(nonatomic,readwrite,retain)NSString *userID;
+@property(nonatomic,readwrite,retain)NSString *userName;
+@property(nonatomic,readwrite,retain)NSMutableArray *activitys;
 @property (nonatomic, readwrite, retain)id<SKAPIDelegate> delegate;
 
 /* Share System*/
@@ -44,7 +48,8 @@
 
 /* send data */
 -(void)sendPostNewJoinFromArguments:(NSDictionary*)arguments;   /* 創造一個新活動 */
--(void)sendJoinActiveFromArguments:(NSDictionary*)arguments;    /* 加入一個活動 */
+-(void)sendJoinActiveByID:(NSString*)activeId;    /* 加入一個活動 */
+-(void)sendLeaveActiveByID:(NSString*)activeId;    /* 離開一個活動 */
 -(void)sendJoinMessageFromArguments:(NSDictionary*)arguments;   /* 在活動留言 */
 
 @end

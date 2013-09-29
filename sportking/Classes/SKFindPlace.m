@@ -72,11 +72,9 @@
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"列表" style:UIBarButtonItemStyleDone target:self action:@selector(changeDisplay)];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"分類" style:UIBarButtonItemStyleDone target:self action:@selector(changeKind)];
-    /* 暫時的！ */
-    name = [[NSMutableArray alloc] initWithObjects:@"台科大室內籃球場",@"台大籃球場",@"民族國中",@"公館國小",@"大安森林公園",@"世新籃球場",@"青年公園籃球場",@"板球體育館籃球場",@"內湖籃球場", nil];
-    position = [[NSMutableArray alloc] initWithObjects:@"距離 0 km",@"距離 0.2 km",@"距離 0.2 km",@"距離 0.5 km",@"距離 4 km",@"距離 5 km",@"距離 12 km",@"距離 15 km",@"距離 20 km", nil];
     
-//    ACAccountStore *account = [[ACAccountStore alloc] init];
+    
+    //    ACAccountStore *account = [[ACAccountStore alloc] init];
 //    ACAccountType *accountType = [account accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
 //    NSArray *accounts = [account
 //                         accountsWithAccountType:accountType];
@@ -143,7 +141,8 @@
     NSDictionary *dic = [placeDic objectAtIndex:[indexPath row]];
     SKMapDetail* FirstViewController = [storyboard instantiateViewControllerWithIdentifier:@"SKMapDetail"];
     [FirstViewController setTitle:[dic objectForKey:@"sitename"]];
-    [FirstViewController.sitename setText:[dic objectForKey:@"sitename"]];
+//    [FirstViewController.sitename setText:[dic objectForKey:@"sitename"]];
+    [FirstViewController setData:dic];
     [self.navigationController pushViewController:FirstViewController animated:YES];
 }
 
@@ -157,6 +156,7 @@
     [map removeAnnotations:annotationsToRemove ] ;
     
     //在新增
+    int i = 0;
     for (NSDictionary *dic in list) {
         
         CLLocationDegrees latitude=[[dic objectForKey:@"latitude"] doubleValue];
@@ -167,11 +167,13 @@
         MKCoordinateRegion adjustedRegion = [map regionThatFits:region];
         [map setRegion:adjustedRegion animated:YES];
         
-        BasicMapAnnotation *  annotation=[[[BasicMapAnnotation alloc] initWithLatitude:latitude andLongitude:longitude]  autorelease];
+        BasicMapAnnotation * annotation=[[[BasicMapAnnotation alloc] initWithLatitude:latitude andLongitude:longitude]  autorelease];
+        annotation.tag = i;
         [annotation setTitle:[dic objectForKey:@"sitename"]];
         [annotation setContent:[NSString stringWithFormat:@"距離 %f 公里",
                                 [[dic objectForKey:@"distance"] floatValue]]];
         [map addAnnotation:annotation];
+        i++;
     }
 }
 
@@ -192,6 +194,8 @@
                                andLongitude:view.annotation.coordinate.longitude] autorelease];
         [_calloutAnnotation setTitle:annotation.title];
         [_calloutAnnotation setContent:annotation.content];
+        selectIndex = annotation.tag;
+        _calloutAnnotation.tag = annotation.tag;
         [mapView addAnnotation:_calloutAnnotation];
         
         
@@ -224,7 +228,8 @@
             JingDianMapCell  *cell = [[[NSBundle mainBundle] loadNibNamed:@"JingDianMapCell" owner:self options:nil] objectAtIndex:0];
             [cell.name setText:annotation_new.title];
             [cell.content setText:annotation_new.content];
-            [cell.btn addTarget:self action:@selector(detail_click) forControlEvents:UIControlEventTouchUpInside];
+            cell.btn.tag = annotation_new.tag;
+            [cell.btn addTarget:self action:@selector(detail_click:) forControlEvents:UIControlEventTouchUpInside];
             [annotationView setCell:cell];
             [annotationView.contentView addSubview:cell];
         }else{
@@ -255,12 +260,13 @@
     [self setAnnotionsWithList:_annotationList];
 }
 
--(void)detail_click{
+-(void)detail_click:(UIButton*)btn{
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
-    
+    NSDictionary *dic = [placeDic objectAtIndex:btn.tag];
     SKMapDetail* FirstViewController = [storyboard instantiateViewControllerWithIdentifier:@"SKMapDetail"];
     [FirstViewController setTitle:_calloutAnnotation.title];
-    [FirstViewController.sitename setText:_calloutAnnotation.title];
+//    [FirstViewController.sitename setText:_calloutAnnotation.title];
+    [FirstViewController setData:dic];
     [self.navigationController pushViewController:FirstViewController animated:YES];
 }
 
@@ -273,8 +279,11 @@
     }
     X = userLocation.location.coordinate.latitude;
     Y = userLocation.location.coordinate.longitude;
+    if ([placeDic count]<1) {
+        [[SKAPI sharedSKAPI] getPlaceDataByKind:1 X:X Y:Y];
+    }
     
-    NSLog(@"現在位置   x:%f  y:%f",X,Y);
+//    NSLog(@"現在位置   x:%f  y:%f",X,Y);
     
     //自行定義的設定地圖函式
     //    [self setMapRegionLongitude:Y andLatitude:X withLongitudeSpan:0.05 andLatitudeSpan:0.05];
@@ -295,6 +304,7 @@
     //前往顯示位置
     [mapView setRegion:mapRegion];
     [mapView regionThatFits:mapRegion];
+    mapView.showsUserLocation = NO;
 }
 
 #pragma mark -other
@@ -368,12 +378,10 @@
     
     self.sportImg.image = [UIImage imageNamed:image];
     
-    
 }
 
 -(void)SKAPI:(SKAPI *)skAPI didGetPlaceData:(NSDictionary *)result{
-    NSLog(@"result:%@",result);
-    
+//    NSLog(@"result:%@",result);
     
     [placeDic removeAllObjects];
     NSMutableArray *arr = [[NSMutableArray alloc]init];
@@ -382,6 +390,7 @@
         NSDictionary *dic1=[NSDictionary dictionaryWithObjectsAndKeys:
                             [dic objectForKey:@"sitename"],@"sitename",
                             [dic objectForKey:@"distance"],@"distance",
+                            [dic objectForKey:@"site"],@"address",
                             [dic objectForKey:@"x"],@"latitude",
                             [dic objectForKey:@"y"],@"longitude",nil];
         [arr addObject:dic1];

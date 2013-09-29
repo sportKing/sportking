@@ -9,6 +9,7 @@
 
 @property (nonatomic, retain) NSString *title;
 @property (nonatomic, retain) NSString *content;
+@property(nonatomic,readwrite,assign)int tag;
 
 - (id)initWithLatitude:(CLLocationDegrees)latitude
 		  andLongitude:(CLLocationDegrees)longitude;

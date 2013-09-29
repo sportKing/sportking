@@ -11,10 +11,8 @@
 
 @interface SKFindPlace : UIViewController{
     BOOL isShowMap;
-    NSMutableArray *name;
-    NSMutableArray *position;
     NSMutableArray *placeDic;
-
+    int selectIndex;
 }
 
 @property(nonatomic,readwrite,retain)IBOutlet UITableView *table;

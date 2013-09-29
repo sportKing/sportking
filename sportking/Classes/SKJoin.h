@@ -7,12 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SKAddActivity.h"
 
 @interface SKJoin : UIViewController{
-    NSMutableArray *names;
-    NSMutableArray *peoples;
-    NSMutableArray *descripts;
-    NSMutableArray *activity;
+    NSMutableArray *joinDatas;
 }
 
 @property(nonatomic,readwrite,retain)IBOutlet UITableView *table;

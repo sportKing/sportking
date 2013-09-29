@@ -9,8 +9,13 @@
 #import "SKJoin.h"
 #import "sportcell.h"
 #import "SKSelectKind.h"
+#import "SKJoinDetail.h"
 #import "FPPopoverController.h"
-@interface SKJoin ()<selectKindDelegate>{
+#import "SKAPI.h"
+#import "SKAddActivity.h"
+#import "BDKNotifyHUD.h"
+
+@interface SKJoin ()<selectKindDelegate,SKAPIDelegate>{
     FPPopoverController *popover;
 }
 
@@ -34,35 +39,85 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self.navigationItem setTitle:@"活動"];
+    if ([SKAPI sharedSKAPI].userID == nil) {
+        for (UIView *view in self.view.subviews) {
+            [view setHidden:YES];
+        }
+        
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"登入" style:UIBarButtonItemStyleDone target:self action:@selector(login)];
+        [self login];
+    }else{
+        for (UIView *view in self.view.subviews) {
+            [view setHidden:NO];
+        }
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"分類" style:UIBarButtonItemStyleDone target:self action:@selector(changeKind)];
+        
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"我的活動" style:UIBarButtonItemStyleDone target:self action:@selector(myActivity)];
+    }
+    
     table.hidden = NO;
     
     
-    [self.navigationController.visibleViewController setTitle:@"我的活動"];
-    //self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"分類" style:UIBarButtonItemStyleDone target:self action:@selector(changeKind)];
-    
-    
-    peoples = [[NSMutableArray alloc] initWithObjects:@"1/4",@"3 / 4",@" 3 / 4",@"1 / 2",@"7 / 12",@"0 / 4", nil];
-    names = [[NSMutableArray alloc] initWithObjects:@"一起打球吧！",@"籃球菜鳥找新手帶",@"籃球四缺一",@"鬥牛二缺一",@"神手欠人電",@"快樂打籃球", nil];
-    descripts = [[NSMutableArray alloc] initWithObjects:@"台北大安區   距離 1 km",
-                 @"新北永和區   距離 3 km",
-                 @"台北大安區   距離 5 km",
-                 @"新北板橋區   距離 15 km",
-                 @"桃園中壢市  距離 37 km",@"新竹竹北市   距離 72 km", nil];
+    joinDatas = [[NSMutableArray alloc] init];
+    [[SKAPI sharedSKAPI] setDelegate:self];
+//    [[SKAPI sharedSKAPI] getGroupDataBy:1];
 
 }
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:YES];
+    
+    [self.navigationItem setTitle:@"活動"];
+    if ([SKAPI sharedSKAPI].userID == nil) {
+        for (UIView *view in self.view.subviews) {
+            [view setHidden:YES];
+        }
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"登入" style:UIBarButtonItemStyleDone target:self action:@selector(login)];
+    }else{
+        for (UIView *view in self.view.subviews) {
+            [view setHidden:NO];
+        }
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"分類" style:UIBarButtonItemStyleDone target:self action:@selector(changeKind)];
+        
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"我的活動" style:UIBarButtonItemStyleDone target:self action:@selector(myActivity)];
+        [[SKAPI sharedSKAPI] getGroupDataBy:1];
+    }
+    
+}
+
+-(void)myActivity{
+    
+    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
+    
+    UIViewController* viewController = [storyboard instantiateViewControllerWithIdentifier:@"SKMyActivity"];
+    [self.navigationController pushViewController:viewController animated:YES];
+}
+
+-(void)login{
+    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
+    
+    UIViewController* viewController = [storyboard instantiateViewControllerWithIdentifier:@"SKLogin"];
+    [self presentModalViewController:viewController animated:YES];
+}
+
 #pragma mark -tableView delegate
 
 -(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
 }
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [names count];
+    return [joinDatas count];
 }
+
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
     static NSString *CellIdentifier = @"sportcell";
+    NSDictionary *dic = [joinDatas objectAtIndex:[indexPath row]];
     
     sportcell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
@@ -70,9 +125,11 @@
         cell = [nibObjs objectAtIndex:0];
     }
     
-    cell.people.text = [peoples objectAtIndex:indexPath.row];
-    cell.name.text = [names objectAtIndex:indexPath.row];
-    cell.descript.text = [descripts objectAtIndex:indexPath.row];
+    NSString *people = [NSString stringWithFormat:@"%@",[dic objectForKey:@"number_of_people"]];
+    cell.people.text = people;
+    cell.name.text = [dic objectForKey:@"active_name"];
+    cell.descript.text = [dic objectForKey:@"site"];
+    
     return cell;
 }
 
@@ -83,10 +140,21 @@
     
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
     
-    [self.navigationController.visibleViewController setTitle:@"我的活動"];
-    UIViewController* FirstViewController = [storyboard instantiateViewControllerWithIdentifier:@"SKJoinDetail"];
+    NSDictionary *dic = [joinDatas objectAtIndex:[indexPath row]];
+    bool isjoin = NO;
     
-    [self.navigationController pushViewController:FirstViewController animated:YES];
+    for (NSDictionary *dic in [SKAPI sharedSKAPI].activitys) {
+        NSString *joinNo = [dic objectForKey:@"no"];
+        if ([joinNo isEqualToString:[dic objectForKey:@"no"]]) {
+            isjoin = YES;
+        }
+    }
+    SKJoinDetail* joinViewController = [storyboard instantiateViewControllerWithIdentifier:@"SKJoinDetail"];
+    [joinViewController setData:dic];
+    [joinViewController setIsJoined:isjoin];
+    
+    [joinViewController.navigationItem setTitle:[dic objectForKey:@"active_name"]];
+    [self.navigationController pushViewController:joinViewController animated:YES];
     
 }
 
@@ -115,7 +183,7 @@
 }
 
 -(void)selectKindDidFinish:(int)kind{
-    NSLog(@"%d",kind);
+    [[SKAPI sharedSKAPI] getGroupDataBy:kind];
     [popover dismissPopoverAnimated:YES];
     NSString *image = nil;
     switch (kind) {
@@ -144,8 +212,24 @@
 
 }
 
-
 -(IBAction)addActivity:(id)sender{
+    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
+    SKAddActivity *addView = [storyboard instantiateViewControllerWithIdentifier:@"SKAddActivity"];
     
+    [addView setTitle:@"建立活動"];
+    [self.navigationController presentModalViewController:addView animated:YES];
 }
+
+#pragma mark -SKAPI
+-(void)SKAPI:(SKAPI *)skAPI didGetGroupData:(NSDictionary *)result{
+    [joinDatas removeAllObjects];
+    
+    for (NSDictionary *dic in result) {
+        [joinDatas addObject:dic];
+    }
+    [table reloadData];
+}
+
+
+
 @end

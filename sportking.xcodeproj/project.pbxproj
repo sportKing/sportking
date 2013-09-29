@@ -76,8 +76,24 @@
 		84573C4217EF220700A3B4AE /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 84573C4117EF220700A3B4AE /* libsqlite3.0.dylib */; };
 		84573C4417EF228B00A3B4AE /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84573C4317EF228B00A3B4AE /* AdSupport.framework */; };
 		845C7328179C163800748ED6 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 842BA302173F32830044D6B6 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		846C1D8D17F83E6500435639 /* SKMyActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 846C1D8C17F83E6500435639 /* SKMyActivity.m */; };
+		8470B58D17F273A1006C05C5 /* active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8470B58917F273A1006C05C5 /* active@2x.png */; };
+		8470B58E17F273A1006C05C5 /* knowledge@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8470B58A17F273A1006C05C5 /* knowledge@2x.png */; };
+		8470B58F17F273A1006C05C5 /* place@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8470B58B17F273A1006C05C5 /* place@2x.png */; };
+		8470B59017F273A1006C05C5 /* teach@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8470B58C17F273A1006C05C5 /* teach@2x.png */; };
+		8470B59317F2752E006C05C5 /* SKAddActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470B59217F2752E006C05C5 /* SKAddActivity.m */; };
+		84A204F317F165510056FC39 /* map.png in Resources */ = {isa = PBXBuildFile; fileRef = 84A204F217F165510056FC39 /* map.png */; };
 		84BABF0C16EDAA2D00BDD596 /* SKJoin.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BABF0B16EDAA2D00BDD596 /* SKJoin.m */; };
 		84BABF0F16EDAB1300BDD596 /* SKKnowledge.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BABF0E16EDAB1300BDD596 /* SKKnowledge.m */; };
+		84DFA8B417F7167F006434BC /* mainCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84DFA8B317F7167F006434BC /* mainCell.xib */; };
+		84DFA8B717F71840006434BC /* mainCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DFA8B617F71840006434BC /* mainCell.m */; };
+		84DFA8B917F71BAD006434BC /* mapCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84DFA8B817F71BAD006434BC /* mapCell.xib */; };
+		84DFA8BC17F71C0D006434BC /* mapCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DFA8BB17F71C0D006434BC /* mapCell.m */; };
+		84DFA8BE17F71F19006434BC /* msgCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84DFA8BD17F71F19006434BC /* msgCell.xib */; };
+		84DFA8C117F71FA7006434BC /* MoPhotograph.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DFA8C017F71FA7006434BC /* MoPhotograph.m */; };
+		84DFA8C417F71FD9006434BC /* msgCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DFA8C317F71FD9006434BC /* msgCell.m */; };
+		84EB828617F7BAFD00FAF3F1 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84EB828517F7BAFD00FAF3F1 /* AddressBookUI.framework */; };
+		84EB828917F7C57C00FAF3F1 /* SKLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = 84EB828817F7C57C00FAF3F1 /* SKLogin.m */; };
 		84EEC0B716E8491000E799DD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84EEC0B616E8491000E799DD /* UIKit.framework */; };
 		84EEC0B916E8491000E799DD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84EEC0B816E8491000E799DD /* Foundation.framework */; };
 		84EEC0BB16E8491000E799DD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84EEC0BA16E8491000E799DD /* CoreGraphics.framework */; };
@@ -202,10 +218,33 @@
 		84573C3F17EF214100A3B4AE /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add.png; sourceTree = "<group>"; };
 		84573C4117EF220700A3B4AE /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		84573C4317EF228B00A3B4AE /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		846C1D8B17F83E6500435639 /* SKMyActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKMyActivity.h; sourceTree = "<group>"; };
+		846C1D8C17F83E6500435639 /* SKMyActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKMyActivity.m; sourceTree = "<group>"; };
+		8470B58917F273A1006C05C5 /* active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "active@2x.png"; sourceTree = "<group>"; };
+		8470B58A17F273A1006C05C5 /* knowledge@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "knowledge@2x.png"; sourceTree = "<group>"; };
+		8470B58B17F273A1006C05C5 /* place@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "place@2x.png"; sourceTree = "<group>"; };
+		8470B58C17F273A1006C05C5 /* teach@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "teach@2x.png"; sourceTree = "<group>"; };
+		8470B59117F2752E006C05C5 /* SKAddActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKAddActivity.h; sourceTree = "<group>"; };
+		8470B59217F2752E006C05C5 /* SKAddActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKAddActivity.m; sourceTree = "<group>"; };
+		84A204F217F165510056FC39 /* map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map.png; sourceTree = "<group>"; };
 		84BABF0A16EDAA2D00BDD596 /* SKJoin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKJoin.h; sourceTree = "<group>"; };
 		84BABF0B16EDAA2D00BDD596 /* SKJoin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKJoin.m; sourceTree = "<group>"; };
 		84BABF0D16EDAB1300BDD596 /* SKKnowledge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKKnowledge.h; sourceTree = "<group>"; };
 		84BABF0E16EDAB1300BDD596 /* SKKnowledge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKKnowledge.m; sourceTree = "<group>"; };
+		84DFA8B317F7167F006434BC /* mainCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = mainCell.xib; sourceTree = "<group>"; };
+		84DFA8B517F71840006434BC /* mainCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mainCell.h; sourceTree = "<group>"; };
+		84DFA8B617F71840006434BC /* mainCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = mainCell.m; sourceTree = "<group>"; };
+		84DFA8B817F71BAD006434BC /* mapCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = mapCell.xib; sourceTree = "<group>"; };
+		84DFA8BA17F71C0D006434BC /* mapCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mapCell.h; sourceTree = "<group>"; };
+		84DFA8BB17F71C0D006434BC /* mapCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = mapCell.m; sourceTree = "<group>"; };
+		84DFA8BD17F71F19006434BC /* msgCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = msgCell.xib; sourceTree = "<group>"; };
+		84DFA8BF17F71FA7006434BC /* MoPhotograph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoPhotograph.h; sourceTree = "<group>"; };
+		84DFA8C017F71FA7006434BC /* MoPhotograph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoPhotograph.m; sourceTree = "<group>"; };
+		84DFA8C217F71FD9006434BC /* msgCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = msgCell.h; sourceTree = "<group>"; };
+		84DFA8C317F71FD9006434BC /* msgCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = msgCell.m; sourceTree = "<group>"; };
+		84EB828517F7BAFD00FAF3F1 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
+		84EB828717F7C57C00FAF3F1 /* SKLogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKLogin.h; sourceTree = "<group>"; };
+		84EB828817F7C57C00FAF3F1 /* SKLogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKLogin.m; sourceTree = "<group>"; };
 		84EEC0B316E8491000E799DD /* sportking.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sportking.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84EEC0B616E8491000E799DD /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		84EEC0B816E8491000E799DD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -228,6 +267,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84EB828617F7BAFD00FAF3F1 /* AddressBookUI.framework in Frameworks */,
 				84573C4417EF228B00A3B4AE /* AdSupport.framework in Frameworks */,
 				84573C4217EF220700A3B4AE /* libsqlite3.0.dylib in Frameworks */,
 				845C7328179C163800748ED6 /* Social.framework in Frameworks */,
@@ -310,6 +350,12 @@
 				84239467173967D100C42158 /* SKJoinDetail.h */,
 				84239468173967D100C42158 /* SKJoinDetail.m */,
 				2CFD6C9F175E57AB003FF5AF /* SKTeaching.h */,
+				8470B59117F2752E006C05C5 /* SKAddActivity.h */,
+				8470B59217F2752E006C05C5 /* SKAddActivity.m */,
+				84EB828717F7C57C00FAF3F1 /* SKLogin.h */,
+				846C1D8B17F83E6500435639 /* SKMyActivity.h */,
+				846C1D8C17F83E6500435639 /* SKMyActivity.m */,
+				84EB828817F7C57C00FAF3F1 /* SKLogin.m */,
 				2CFD6CA0175E57AB003FF5AF /* SKTeaching.m */,
 				2CFD6CA2175E5E51003FF5AF /* SKTeachingDetail.h */,
 				2CFD6CA3175E5E52003FF5AF /* SKTeachingDetail.m */,
@@ -355,6 +401,15 @@
 		842707F316EF921F00C2CC4F /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				84DFA8B817F71BAD006434BC /* mapCell.xib */,
+				84DFA8BA17F71C0D006434BC /* mapCell.h */,
+				84DFA8BB17F71C0D006434BC /* mapCell.m */,
+				84DFA8BD17F71F19006434BC /* msgCell.xib */,
+				84DFA8C217F71FD9006434BC /* msgCell.h */,
+				84DFA8C317F71FD9006434BC /* msgCell.m */,
+				84DFA8B317F7167F006434BC /* mainCell.xib */,
+				84DFA8B517F71840006434BC /* mainCell.h */,
+				84DFA8B617F71840006434BC /* mainCell.m */,
 				842707F416EF922C00C2CC4F /* placecell.xib */,
 				842707F516EF922C00C2CC4F /* placecell.h */,
 				842707F616EF922C00C2CC4F /* placecell.m */,
@@ -371,6 +426,11 @@
 				84573C3D17EF1FCC00A3B4AE /* fb-login.png */,
 				8410D3981739E6AD00DA74B2 /* pin.png */,
 				84573C3F17EF214100A3B4AE /* add.png */,
+				8470B58917F273A1006C05C5 /* active@2x.png */,
+				8470B58A17F273A1006C05C5 /* knowledge@2x.png */,
+				8470B58B17F273A1006C05C5 /* place@2x.png */,
+				8470B58C17F273A1006C05C5 /* teach@2x.png */,
+				84A204F217F165510056FC39 /* map.png */,
 				842707FF16EF926500C2CC4F /* people.png */,
 				8427080016EF926500C2CC4F /* badminton.png */,
 				8427080116EF926500C2CC4F /* fake.jpg */,
@@ -418,6 +478,8 @@
 		842BA306173F47280044D6B6 /* Third Party */ = {
 			isa = PBXGroup;
 			children = (
+				84DFA8BF17F71FA7006434BC /* MoPhotograph.h */,
+				84DFA8C017F71FA7006434BC /* MoPhotograph.m */,
 				84573C3617EF1F0300A3B4AE /* FacebookNetwork.h */,
 				84573C3717EF1F0300A3B4AE /* FacebookNetwork.m */,
 			);
@@ -464,6 +526,7 @@
 		84EEC0B516E8491000E799DD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				84EB828517F7BAFD00FAF3F1 /* AddressBookUI.framework */,
 				84573C4317EF228B00A3B4AE /* AdSupport.framework */,
 				84573C4117EF220700A3B4AE /* libsqlite3.0.dylib */,
 				84573C3917EF1F1F00A3B4AE /* FacebookSDK.framework */,
@@ -568,7 +631,9 @@
 				84EEC0C916E8491000E799DD /* Default.png in Resources */,
 				84EEC0CB16E8491000E799DD /* Default@2x.png in Resources */,
 				84EEC0CD16E8491000E799DD /* Default-568h@2x.png in Resources */,
+				84DFA8B417F7167F006434BC /* mainCell.xib in Resources */,
 				84EEC0D016E8491000E799DD /* MainStoryboard_iPhone.storyboard in Resources */,
+				8470B59017F273A1006C05C5 /* teach@2x.png in Resources */,
 				84EEC0D316E8491000E799DD /* MainStoryboard_iPad.storyboard in Resources */,
 				842707FA16EF922C00C2CC4F /* placecell.xib in Resources */,
 				84573C4017EF214100A3B4AE /* add.png in Resources */,
@@ -578,20 +643,26 @@
 				8427080D16EF926500C2CC4F /* badminton.png in Resources */,
 				8427080E16EF926500C2CC4F /* fake.jpg in Resources */,
 				8427080F16EF926500C2CC4F /* baseball.png in Resources */,
+				8470B58F17F273A1006C05C5 /* place@2x.png in Resources */,
+				8470B58E17F273A1006C05C5 /* knowledge@2x.png in Resources */,
 				8427081016EF926500C2CC4F /* basketball.png in Resources */,
 				8427081116EF926500C2CC4F /* football.png in Resources */,
+				84A204F317F165510056FC39 /* map.png in Resources */,
 				8427081216EF926500C2CC4F /* bg.jpg in Resources */,
 				8427081316EF926500C2CC4F /* soccer.png in Resources */,
 				8427081416EF926500C2CC4F /* tennis.png in Resources */,
+				84DFA8B917F71BAD006434BC /* mapCell.xib in Resources */,
 				8427081516EF926500C2CC4F /* volleyball.png in Resources */,
 				8427081616EF926500C2CC4F /* join.jpg in Resources */,
 				8427081716EF926500C2CC4F /* knowledge.jpg in Resources */,
 				8427081816EF926500C2CC4F /* place.jpg in Resources */,
 				8427082D16EF9AE800C2CC4F /* SKSelectKind.xib in Resources */,
 				8423946F173968AB00C42158 /* Checkmark.png in Resources */,
+				8470B58D17F273A1006C05C5 /* active@2x.png in Resources */,
 				8423947E17396E0600C42158 /* JingDianMapCell.xib in Resources */,
 				84573C3E17EF1FCC00A3B4AE /* fb-login.png in Resources */,
 				8410D3991739E6AD00DA74B2 /* pin.png in Resources */,
+				84DFA8BE17F71F19006434BC /* msgCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -618,12 +689,16 @@
 				8423946E173968AB00C42158 /* BDKNotifyHUD.m in Sources */,
 				8423947A17396E0600C42158 /* BasicMapAnnotation.m in Sources */,
 				8423947B17396E0600C42158 /* CallOutAnnotationVifew.m in Sources */,
+				84DFA8C117F71FA7006434BC /* MoPhotograph.m in Sources */,
 				8423947C17396E0600C42158 /* CalloutMapAnnotation.m in Sources */,
+				84DFA8B717F71840006434BC /* mainCell.m in Sources */,
+				84DFA8BC17F71C0D006434BC /* mapCell.m in Sources */,
 				8423947D17396E0600C42158 /* JingDianMapCell.m in Sources */,
 				2C6807DF1739A8CF00DF430D /* ASIAuthenticationDialog.m in Sources */,
 				2C6807E01739A8CF00DF430D /* ASIDataCompressor.m in Sources */,
 				2C6807E11739A8CF00DF430D /* ASIDataDecompressor.m in Sources */,
 				2C6807E21739A8CF00DF430D /* ASIDownloadCache.m in Sources */,
+				8470B59317F2752E006C05C5 /* SKAddActivity.m in Sources */,
 				2C6807E31739A8CF00DF430D /* ASIFormDataRequest.m in Sources */,
 				2C6807E41739A8CF00DF430D /* ASIHTTPRequest.m in Sources */,
 				2C6807E51739A8CF00DF430D /* ASIInputStream.m in Sources */,
@@ -632,6 +707,7 @@
 				8410D39C1739FA0D00DA74B2 /* SKMapDetail.m in Sources */,
 				842BA2FE173E46F80044D6B6 /* SKPlaceData.m in Sources */,
 				842BA301173E47020044D6B6 /* SKJoinData.m in Sources */,
+				846C1D8D17F83E6500435639 /* SKMyActivity.m in Sources */,
 				841BAE2A175D94F600AF21F4 /* SKAPI.m in Sources */,
 				8436EE79175E5A6800BB34AF /* NSObject+SBJSON.m in Sources */,
 				8436EE7A175E5A6800BB34AF /* NSString+SBJSON.m in Sources */,
@@ -640,7 +716,9 @@
 				8436EE7D175E5A6800BB34AF /* SBJsonWriter.m in Sources */,
 				2CFD6C9E175DC6AE003FF5AF /* SKKnowledgeDetail.m in Sources */,
 				2CFD6CA1175E57AB003FF5AF /* SKTeaching.m in Sources */,
+				84EB828917F7C57C00FAF3F1 /* SKLogin.m in Sources */,
 				2CFD6CA4175E5E52003FF5AF /* SKTeachingDetail.m in Sources */,
+				84DFA8C417F71FD9006434BC /* msgCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

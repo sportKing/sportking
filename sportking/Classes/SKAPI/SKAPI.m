@@ -13,6 +13,8 @@
 @implementation SKAPI
 @synthesize delegate;
 @synthesize userID = userID_;
+@synthesize userName = userName_;
+@synthesize activitys = activitys_;
 static SKAPI* sharedSKAPI = nil;
 NSString *const API_URL = @"http://huang-yao-building.com/db/API.php";
 
@@ -27,6 +29,12 @@ NSString *const API_URL = @"http://huang-yao-building.com/db/API.php";
     self = [super init];
     if (self) {
         self.userID = [[NSUserDefaults standardUserDefaults] objectForKey:@"SK_USERID"];
+        self.userName = [[NSUserDefaults standardUserDefaults] objectForKey:@"SK_USERNAME"];
+        activitys_ = [[NSMutableArray alloc] init];
+        NSLog(@"%@ %@",self.userID,self.userName);
+        if (self.userID) {
+            [self getMyActivity];
+        }
     }
     return self;
 }
@@ -60,8 +68,26 @@ NSString *const API_URL = @"http://huang-yao-building.com/db/API.php";
     [request startAsynchronous];
 }
 
--(void)getGroupData{
+-(void)getGroupDataBy:(int)kind{
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:API_URL]];
+    [request setPostValue:@"getteam" forKey:@"method"];
+    [request setPostValue:[NSString stringWithFormat:@"%d",kind] forKey:@"id"];
+    [request setRequestMethod:@"POST"];
     
+    [request setCompletionBlock:^{
+        NSString *response = [request responseString];
+        NSDictionary *JSON = [response JSONValue];
+        
+#ifdef DEBUG_MODE
+        NSLog(@"get Group %@ ",response);
+#endif
+        
+        if ([delegate respondsToSelector:@selector(SKAPI:didGetGroupData:)]) {
+            [delegate SKAPI:self didGetGroupData:JSON];
+        }
+    }];
+    
+    [request startAsynchronous];
 }
 
 -(void)getRuleDataByKind:(int)kind{
@@ -81,10 +107,6 @@ NSString *const API_URL = @"http://huang-yao-building.com/db/API.php";
         if ([delegate respondsToSelector:@selector(SKAPI:didGetRuleData:)]) {
             [delegate SKAPI:self didGetRuleData:JSON];
         }
-    }];
-    
-    [request setFailedBlock:^{
-        
     }];
     
     [request startAsynchronous];
@@ -145,10 +167,10 @@ NSString *const API_URL = @"http://huang-yao-building.com/db/API.php";
 }
 
 -(void)getJoinMessageFromJoinID:(NSString*)joinID{
-    
+//    NSLog(@"joinid %@",joinID);
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:API_URL]];
     [request setPostValue:@"getmessage" forKey:@"method"];
-    [request setPostValue:[NSString stringWithFormat:@"%@",joinID] forKey:@"id"];
+    [request setPostValue:joinID forKey:@"team_no"];
     [request setRequestMethod:@"POST"];
     
     [request setCompletionBlock:^{
@@ -156,7 +178,7 @@ NSString *const API_URL = @"http://huang-yao-building.com/db/API.php";
         NSDictionary *JSON = [response JSONValue];
         
 #ifdef DEBUG_MODE
-        NSLog(@"get Join Msg %@ ",response);
+        NSLog(@"get Join Msg %@ ",JSON);
 #endif
         
         if ([delegate respondsToSelector:@selector(SKAPI:didGetMessageData:)]) {
@@ -171,42 +193,24 @@ NSString *const API_URL = @"http://huang-yao-building.com/db/API.php";
     [request startAsynchronous];
 }
 
-#pragma mark - send data
-
--(void)sendPostNewJoinFromArguments:(NSDictionary*)arguments{
-//    Method=postgroup
-//    id:哪一項運動的sport_no 		acative_name : 活動名稱			organizer	:主辦人名稱
-//site:地點(地址)
-//date:日期時間(datetime)		total_number_of_people: 上線人數		x:經度
-//y:緯度
-//region:地區
-
-//    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:API_URL]];
-//    [request setPostValue:@"join" forKey:@"method"];
-//    [request setPostValue:[NSString stringWithFormat:@"%@",[arguments objectForKey:@"joinID"]] forKey:@"no"];
-//    [request setPostValue:[NSString stringWithFormat:@"%@",[arguments objectForKey:@"joinerID"]] forKey:@"id"];
-//    [request setRequestMethod:@"POST"];
-//    
-//    [request setCompletionBlock:^{
-//        
-//    }];
-//    
-//    [request setFailedBlock:^{
-//        
-//    }];
-//    
-//    [request startAsynchronous];
-}
-
--(void)sendJoinActiveFromArguments:(NSDictionary*)arguments{
-    
+-(void)getMyActivity{
+    [self.activitys removeAllObjects];
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:API_URL]];
-    [request setPostValue:@"join" forKey:@"method"];
-    [request setPostValue:[NSString stringWithFormat:@"%@",[arguments objectForKey:@"joinID"]] forKey:@"no"];
-    [request setPostValue:[NSString stringWithFormat:@"%@",[arguments objectForKey:@"joinerID"]] forKey:@"id"];
+    [request setPostValue:@"getinfo" forKey:@"method"];
+    [request setPostValue:self.userID forKey:@"fbid"];
     [request setRequestMethod:@"POST"];
     
     [request setCompletionBlock:^{
+        NSString *response = [request responseString];
+        NSDictionary *JSON = [response JSONValue];
+        
+#ifdef DEBUG_MODE
+        NSLog(@"get myactivity %@ ",JSON);
+#endif
+        for (NSDictionary *dic in JSON) {
+            [activitys_ addObject:dic];
+//            [activitys_ addObject:[dic objectForKey:@"team_no"]];
+        }
         
     }];
     
@@ -217,15 +221,81 @@ NSString *const API_URL = @"http://huang-yao-building.com/db/API.php";
     [request startAsynchronous];
 }
 
--(void)sendJoinMessageFromArguments:(NSDictionary*)arguments{
-//no:	這留言隸屬於哪一團的no
-//name:	留言者姓名
-//content:	留言內容
+#pragma mark - send data
+
+-(void)sendPostNewJoinFromArguments:(NSDictionary*)arguments{
+    /*
+     type : 球類
+     userName:userName
+     activeName: 活動名稱
+     activeLocation:活動地點
+     activeDate:活動時間
+     activeContent:活動內容
+     x:精度
+     y:緯度
+     */
+//    NSLog(@"send team%@",arguments);
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:API_URL]];
+    [request setPostValue:@"postteam" forKey:@"method"];
+    [request setPostValue:[NSString stringWithFormat:@"%@",[arguments objectForKey:@"type"]] forKey:@"id"];
+    [request setPostValue:self.userName forKey:@"organizer"];
+    [request setPostValue:self.userID forKey:@"fbid"];
+    [request setPostValue:[NSString stringWithFormat:@"%@",[arguments objectForKey:@"activeName"]] forKey:@"acative_name"];
+    [request setPostValue:[NSString stringWithFormat:@"%@",[arguments objectForKey:@"activeLocation"]] forKey:@"site"];
+    [request setPostValue:[NSString stringWithFormat:@"%@",[arguments objectForKey:@"activeDate"]] forKey:@"date"];
+    [request setPostValue:[NSString stringWithFormat:@"%@",[arguments objectForKey:@"activeContent"]] forKey:@"content"];
+    [request setPostValue:[NSString stringWithFormat:@"%@",[arguments objectForKey:@"x"]] forKey:@"x"];
+    [request setPostValue:[NSString stringWithFormat:@"%@",[arguments objectForKey:@"y"]] forKey:@"y"];
+    [request setRequestMethod:@"POST"];
+    
+    [request setCompletionBlock:^{
+        [self getMyActivity];
+    }];
+    [request startAsynchronous];
+}
+
+-(void)sendJoinActiveByID:(NSString*)activeId{
     
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:API_URL]];
+    [request setPostValue:@"join" forKey:@"method"];
+    [request setPostValue:[NSString stringWithFormat:@"%@",activeId] forKey:@"no"];
+    [request setPostValue:self.userID forKey:@"fbid"];
+    [request setRequestMethod:@"POST"];
+    
+    [request setCompletionBlock:^{
+        [self getMyActivity];
+    }];
+    
+    [request startAsynchronous];
+}
+
+-(void)sendLeaveActiveByID:(NSString *)activeId{
+    
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:API_URL]];
+    [request setPostValue:@"cancle" forKey:@"method"];
+    [request setPostValue:[NSString stringWithFormat:@"%@",activeId] forKey:@"no"];
+    [request setPostValue:self.userID forKey:@"fbid"];
+    [request setRequestMethod:@"POST"];
+    
+    [request setCompletionBlock:^{
+        [self getMyActivity];
+    }];
+    
+    [request startAsynchronous];
+}
+
+-(void)sendJoinMessageFromArguments:(NSDictionary*)arguments{
+//no:	這留言隸屬於哪一團的no
+//fbid: 留言者fbid
+//name:	留言者姓名
+//content:	留言內容
+
+    NSLog(@"%@",arguments);
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:API_URL]];
     [request setPostValue:@"postmessage" forKey:@"method"];
-    [request setPostValue:[NSString stringWithFormat:@"%@",[arguments objectForKey:@"joinID"]] forKey:@"no"];
-    [request setPostValue:[NSString stringWithFormat:@"%@",[arguments objectForKey:@"name"]] forKey:@"name"];
+    [request setPostValue:[NSString stringWithFormat:@"%@",[arguments objectForKey:@"no"]] forKey:@"no"];
+    [request setPostValue:self.userName forKey:@"name"];
+    [request setPostValue:self.userID forKey:@"fbid"];
     [request setPostValue:[NSString stringWithFormat:@"%@",[arguments objectForKey:@"content"]] forKey:@"content"];
     [request setRequestMethod:@"POST"];
     
