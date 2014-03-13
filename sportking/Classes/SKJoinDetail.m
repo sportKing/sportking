@@ -35,7 +35,7 @@
     [super viewDidLoad];
 //    NSLog(@"join detail%@",data);
     // Do any additional setup after loading the view from its nib.
-    if (isJoined) {
+    if (isJoined  && ![[data objectForKey:@"fbid"] isEqualToString:[SKAPI sharedSKAPI].userID]) {
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"退出" style:UIBarButtonItemStyleDone target:self action:@selector(submit)];
     }else{
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"加入" style:UIBarButtonItemStyleDone target:self action:@selector(join)];

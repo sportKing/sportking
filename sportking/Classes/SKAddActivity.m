@@ -137,6 +137,9 @@
     }];
     
     [self dismissModalViewControllerAnimated:YES];
+    
+    
+    [[SKAPI sharedSKAPI] getGroupDataBy:type];
 }
 
 -(void)alert:(NSString*)content{

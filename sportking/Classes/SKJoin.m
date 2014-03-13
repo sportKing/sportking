@@ -222,6 +222,7 @@
 
 #pragma mark -SKAPI
 -(void)SKAPI:(SKAPI *)skAPI didGetGroupData:(NSDictionary *)result{
+//    NSLog(@"get activity  %@",result);
     [joinDatas removeAllObjects];
     
     for (NSDictionary *dic in result) {
